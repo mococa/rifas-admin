@@ -1,19 +1,23 @@
-import { useAuth } from "contexts/Auth";
-import { getCookie } from "helpers/cookies";
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import { Card } from "components/Card";
+import React from "react";
+import { PageTemplate } from "components/PageTemplate";
+import { Welcome } from "components/Welcome";
 
-interface Props {}
+import { getSections } from "helpers/sections";
 
-export const MainPage: React.FC<Props> = ({ children }) => {
-  const { user } = useAuth();
-  const cookie = getCookie("jwt");
-  const navigate = useNavigate();
-  useEffect(() => {
-    if (!user && !cookie) {
-      navigate("/auth");
-    }
-  }, [cookie, user, navigate]);
+import { CardsContainer, MainContainer } from "./styles";
 
-  return <div>hey</div>;
+export const MainPage: React.FC = () => {
+  return (
+    <PageTemplate>
+      <MainContainer>
+        <Welcome name="Eliel" />
+        <CardsContainer>
+          {getSections.map((section) => (
+            <Card key={section.id} {...section} />
+          ))}
+        </CardsContainer>
+      </MainContainer>
+    </PageTemplate>
+  );
 };

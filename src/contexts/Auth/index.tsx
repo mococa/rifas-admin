@@ -28,16 +28,16 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   useEffect(() => {
     const effect = async () => {
-      try {
-        if (!cookie) return;
-        const fetchedUser = await AuthAPI.getMe();
-        setUser(fetchedUser);
-      } catch (error) {
-        toastr.error(errorHandler(error as AxiosError));
-        setUser(null);
-        deleteAllCookies();
-        navigate("/auth");
-      }
+      // try {
+      //   if (!cookie) return;
+      //   const fetchedUser = await AuthAPI.getMe();
+      //   setUser(fetchedUser);
+      // } catch (error) {
+      //   toastr.error(errorHandler(error as AxiosError));
+      //   setUser(null);
+      //   deleteAllCookies();
+      //   navigate("/auth");
+      // }
     };
     effect();
   }, [cookie]);

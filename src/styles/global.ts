@@ -16,6 +16,8 @@ export const global = createGlobalStyle`
 
   #root{
       min-height: 100vh;
+      display: flex;
+      flex-flow: column;
   }
 
   html, body {
@@ -82,6 +84,9 @@ export const global = createGlobalStyle`
     --blue: #4790b8;
     --blue200: #03b4c6;
     --green: #37be58;
+    --orange: #e24f2a;
+    --dark_green: #108e64;
+    --purple: #5849ad
 
     --black500: #272727;
     --black200: #3d3d3d;
@@ -93,48 +98,10 @@ export const global = createGlobalStyle`
     --font-md: 1rem;
     --font-lg: 1.125rem;
     --font-xl: 1.25rem;
-    --font-2xl: 1.5rem;
-    --font-3xl: 1.875rem;
-    --font-4xl: 2.25rem;
-    --font-5xl: 3rem;
-    --font-6xl: 3.75rem;
-    --font-7xl: 4.5rem;
-    --font-8xl: 6rem;
-    --font-9xl: 8rem;
 
-    /* ----- Spacing ----- */
-    --spacing-dot5: 0.125rem;
-    --spacing-1: 0.25rem;
-    --spacing-1dot5: 0.375rem;
-    --spacing-2: 0.5rem;
-    --spacing-2dot5: 0.625rem;
-    --spacing-3: 0.75rem;
-    --spacing-3dot5: 0.875rem;
-    --spacing-4: 1rem;
-    --spacing-5: 1.25rem;
-    --spacing-6: 1.5rem;
-    --spacing-7: 1.75rem;
-    --spacing-8: 2rem;
-    --spacing-9: 2.25rem;
-    --spacing-10: 2.5rem;
-    --spacing-12: 3rem;
-    --spacing-14: 3.5rem;
-    --spacing-16: 4rem;
-    --spacing-20: 5rem;
-    --spacing-24: 6rem;
-    --spacing-28: 7rem;
-    --spacing-32: 8rem;
-    --spacing-36: 9rem;
-    --spacing-40: 10rem;
-    --spacing-44: 11rem;
-    --spacing-48: 12rem;
-    --spacing-52: 13rem;
-    --spacing-56: 14rem;
-    --spacing-60: 15rem;
-    --spacing-64: 16rem;
-    --spacing-72: 18rem;
-    --spacing-80: 20rem;
-    --spacing-96: 24rem;
+    /* ----- Media Queries ----- */
+      --mobile: 675px;
+
   }
 
   #toastr-root{
@@ -150,5 +117,25 @@ export const global = createGlobalStyle`
     & > div{
         margin-bottom: 8px;
     }
+  }
+
+  .wave {
+    animation-name: wave-animation;  /* Refers to the name of your @keyframes element below */
+    animation-duration: 2.5s;        /* Change to speed up or slow down */
+    animation-iteration-count: infinite;  /* Never stop waving :) */
+    transform-origin: 70% 70%;       /* Pivot around the bottom-left palm */
+    display: inline-block;
+    font-size: inherit;
+  }
+
+  @keyframes wave-animation {
+    0% { transform: rotate( 0.0deg) }
+    10% { transform: rotate(14.0deg) }  /* The following five values can be played with to make the waving more or less extreme */
+    20% { transform: rotate(-8.0deg) }
+    30% { transform: rotate(14.0deg) }
+    40% { transform: rotate(-4.0deg) }
+    50% { transform: rotate(10.0deg) }
+    60% { transform: rotate( 0.0deg) }  /* Reset for the last half to pause */
+    100% { transform: rotate( 0.0deg) }
   }
 `;
