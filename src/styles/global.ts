@@ -13,6 +13,12 @@ export const global = createGlobalStyle`
     scroll-margin-top: -100px;
   }
 
+  html.dark{
+    background: #313131;
+
+    color: white;
+  }
+
   #root{
       min-height: 100vh;
       display: flex;
@@ -116,6 +122,10 @@ export const global = createGlobalStyle`
     & > div{
         margin-bottom: 8px;
     }
+  }
+
+  .modals-container{
+    color: #272727;
   }
 
   .wave {

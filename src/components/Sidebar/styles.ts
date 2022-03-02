@@ -15,14 +15,17 @@ export const SidebarContainer = styled.aside`
 
   a {
     overflow: hidden;
-    transition: 150ms;
+
+    transition: 400ms;
 
     width: fit-content;
 
-    :hover {
-      background-color: rgba(0, 0, 0, 0.06);
+    border-radius: 50%;
 
-      border-radius: 50%;
+    :hover {
+      background-color: rgba(0, 0, 0, 0.08);
+
+      border-radius: 0;
     }
 
     :active {

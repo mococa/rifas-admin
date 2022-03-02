@@ -18,7 +18,7 @@ export const StyledCard = styled.button`
 
   background: ${(props) =>
     transparentize(
-      0.85,
+      0.9,
       CardColor[(props["aria-label"] as keyof typeof CardColor) || "green"]
     )};
 

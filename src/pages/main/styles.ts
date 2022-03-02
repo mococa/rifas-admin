@@ -12,7 +12,7 @@ export const CardsContainer = styled.div`
 
   width: fit-content;
 
-  border-bottom: 1px solid var(--white500);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 
   @media (${Devices.tablet}) {
     grid-template-columns: 1fr 1fr;
@@ -20,10 +20,9 @@ export const CardsContainer = styled.div`
 `;
 
 export const MainContainer = styled.div`
-    display: flex;
-    flex-flow: column;
-    align-self: center;
-    
-    width: fit-content;
+  display: flex;
+  flex-flow: column;
+  align-self: center;
 
-`
+  width: fit-content;
+`;

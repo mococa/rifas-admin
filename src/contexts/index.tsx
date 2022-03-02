@@ -6,12 +6,15 @@ import { BrowserRouter } from "react-router-dom";
 
 // Providers
 import { AuthProvider } from "./Auth";
+import { DarkModeProvider } from "./DarkMode";
 
 export const AppProvider: React.FC = ({ children }) => (
   <ToastrProvider>
     <DialogProvider>
       <BrowserRouter>
-        <AuthProvider>{children}</AuthProvider>
+        <DarkModeProvider>
+          <AuthProvider>{children}</AuthProvider>
+        </DarkModeProvider>
       </BrowserRouter>
     </DialogProvider>
   </ToastrProvider>
