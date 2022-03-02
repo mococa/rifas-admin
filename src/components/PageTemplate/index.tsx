@@ -1,24 +1,33 @@
+// External
 import React, { useEffect } from "react";
 import { useNavigate } from "react-router";
 
+// Components
 import { Header } from "components/Header";
 import { Sidebar } from "components/Sidebar";
-
-import { useAuth } from "contexts/Auth";
-
-import { getCookie } from "helpers/cookies";
-
-import { ChildrenContainer, PageContainer, PageWrapper } from "./styles";
 import { BackButtonTitle } from "components/BackButtonTitle";
 
+// Hooks
+import { useAuth } from "contexts/Auth";
+
+// Helpers
+import { getCookie } from "helpers/cookies";
+
+// Styles
+import { ChildrenContainer, PageContainer, PageWrapper } from "./styles";
+
+// Interfaces
 interface Props {
   title?: string;
 }
 
 export const PageTemplate: React.FC<Props> = ({ children, title }) => {
-  // const { user } = useAuth();
   // const cookie = getCookie("jwt");
+  // Hooks
+  // const { user } = useAuth();
   // const navigate = useNavigate();
+
+  // Effects
   // useEffect(() => {
   //   if (!user && !cookie) {
   //     navigate("/auth");

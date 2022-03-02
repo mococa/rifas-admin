@@ -1,6 +1,10 @@
+// External
 import React from "react";
+
+// Styles
 import { WelcomeBox } from "./styles";
 
+// Interfaces
 interface Props {
   name: string;
 }

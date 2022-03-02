@@ -1,7 +1,13 @@
+// External
 import React from "react";
+
+// Icons
 import { BiLoaderAlt } from "react-icons/bi";
+
+// Styles
 import { LoadingContainer } from "./styles";
 
+// Interfaces
 interface Props {
   size?: number;
 }

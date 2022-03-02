@@ -1,7 +1,9 @@
 // External
-import { getSections } from "helpers/sections";
 import React from "react";
 import { Link } from "react-router-dom";
+
+// Helpers
+import { getSections } from "helpers/sections";
 
 // Styles
 import { SidebarContainer, SidebarItem } from "./styles";

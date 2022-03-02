@@ -1,7 +1,14 @@
-import { RoundButton } from "components/RoundButton";
+// External
 import React from "react";
+
+// Icons
 import { IoAddOutline } from "react-icons/io5";
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
+
+// Components
+import { RoundButton } from "components/RoundButton";
+
+// Styles
 import {
   RaffleActionsHeader,
   RaffleListContainer,
@@ -9,6 +16,7 @@ import {
   RafflesBody,
 } from "./styles";
 
+// Interfaces
 interface Props {}
 
 export const RafflesList: React.FC<Props> = () => {

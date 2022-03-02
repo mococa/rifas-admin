@@ -1,8 +1,10 @@
-/* ---------- External ---------- */
+// External
 import React from "react";
+
+// Styles
 import { EndContainer, Input, InputContainer, Label } from "./styles";
 
-/* ---------- Interfaces ---------- */
+// Interfaces
 interface Props {
   label: string;
   name: string;

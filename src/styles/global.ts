@@ -1,5 +1,4 @@
 import { createGlobalStyle } from "styled-components";
-import { displayPartsToString } from "typescript";
 
 export const global = createGlobalStyle`
   * {

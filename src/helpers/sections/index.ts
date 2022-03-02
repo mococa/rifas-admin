@@ -1,4 +1,7 @@
+// Types
 import { ISection } from "./../../@types/Section/index";
+
+// Icons
 import { BsBoxSeam, BsPersonFill } from "react-icons/bs";
 import { IoTicketOutline } from "react-icons/io5";
 import { MdPayment } from "react-icons/md";

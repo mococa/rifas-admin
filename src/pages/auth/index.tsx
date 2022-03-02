@@ -1,14 +1,23 @@
+// External
 import React from "react";
-import { useToastr } from "mococa-toastr";
+
+// Components
 import { FormAuth } from "components/FormAuth";
+
+// Helpers
 import { deleteAllCookies } from "helpers/cookies";
-import { useAuth } from "contexts/Auth";
+
+// Hooks
+import { useToastr } from "mococa-toastr";
 import { useNavigate } from "react-router";
+import { useAuth } from "contexts/Auth";
 
 export const AuthPage = () => {
+  // Hooks
   const toastr = useToastr();
   const { setUser } = useAuth();
   const navigate = useNavigate();
+  
   return (
     <div
       style={{

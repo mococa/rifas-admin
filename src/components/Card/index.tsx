@@ -1,8 +1,12 @@
+// External
 import React from "react";
-import { InnerCardContainer, StyledCard } from "./styles";
-import { Section } from "enums/sections";
-import { CardColor } from "enums/colors";
 import { Link } from "react-router-dom";
+
+// Enums
+import { CardColor } from "enums/colors";
+
+// Styles
+import { InnerCardContainer, StyledCard } from "./styles";
 
 interface Props {
   icon: JSX.Element;
