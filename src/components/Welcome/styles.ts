@@ -17,7 +17,9 @@ export const WelcomeBox = styled.div`
 
   @media (${Devices.mobile}) {
     gap: 4px;
-    
+
+    padding: 12px 2px 16px;
+
     h2,
     h3 {
       font-size: inherit;
