@@ -14,7 +14,7 @@ export const getSections: ISection[] = [
     color: "orange",
   },
   {
-    label: "Ingressos",
+    label: "Bilhetes",
     id: "tickets",
     icon: IoTicketOutline({}),
     color: "red",
