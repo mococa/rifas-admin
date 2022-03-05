@@ -1,5 +1,5 @@
 // Types
-import { ISection } from "./../../@types/Section/index";
+import { ISection } from "_types/Section/index";
 
 // Icons
 import { BsBoxSeam, BsPersonFill } from "react-icons/bs";

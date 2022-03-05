@@ -9,8 +9,8 @@ import { AuthAPI } from "../../api/Auth";
 import { MdEmail, MdLock } from "react-icons/md";
 
 // Types
-import { LoginFields } from "../../@types/Auth";
-import { User } from "../../@types/User";
+import { LoginFields } from "../../_types/Auth";
+import { User } from "../../_types/User";
 
 // Helpers
 import { errorHandler } from "../../helpers/errors";

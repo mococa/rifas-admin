@@ -8,13 +8,17 @@ export const InputContainer = styled.div`
   height: 48px;
   width: 100%;
 
-  border: 1px solid var(--white500);
+  border: 1px solid var(--border-color);
   border-radius: 12px;
 
   padding: 4px;
 
   :not(:first-of-type) {
     margin-top: 12px;
+  }
+
+  input {
+    background: 0;
   }
 
   &[aria-current="true"],

@@ -31,7 +31,14 @@ export const request = {
         throw err;
       });
   },
-  put: async (path: string, data = undefined) => {
+  patch: async (path: string, data = {}) => {
+    return Axios.patch(path, data)
+      .then(({ data }) => data)
+      .catch((err) => {
+        throw err;
+      });
+  },
+  put: async (path: string, data = {}) => {
     return Axios.put(path, data)
       .then(({ data }) => data)
       .catch((err) => {

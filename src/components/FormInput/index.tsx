@@ -13,7 +13,7 @@ interface Props {
   errorMessage?: string;
   end?: JSX.Element;
   pattern?: string;
-  value: string;
+  value: string | number[];
   type: React.HTMLInputTypeAttribute;
   required?: boolean;
 }
@@ -35,15 +35,13 @@ export const FormInput: React.FC<Props> = ({
       <Label>{label}</Label>
       <Input
         name={name}
-        value={value}
+        value={String(value)}
         type={type}
         placeholder={placeholder}
         onChange={onChange}
         pattern={pattern}
-        autoComplete="off"
         required={required}
       />
-
       {end && <EndContainer>{end}</EndContainer>}
     </InputContainer>
   );

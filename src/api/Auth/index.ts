@@ -2,7 +2,7 @@
 import { request } from "./../index";
 
 // Interfaces
-import { LoginFields } from "./../../@types/Auth/index";
+import { LoginFields } from "_types/Auth/index";
 
 export class AuthAPI {
   static login({ email, password }: LoginFields) {

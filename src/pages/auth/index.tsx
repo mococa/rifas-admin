@@ -17,7 +17,7 @@ export const AuthPage = () => {
   const toastr = useToastr();
   const { setUser } = useAuth();
   const navigate = useNavigate();
-  
+
   return (
     <div
       style={{
@@ -26,9 +26,8 @@ export const AuthPage = () => {
     >
       <FormAuth
         onLogin={(user) => {
-          //setUser(user);
           toastr.success("Sucesso!", `Bem vindo(a), ${user.name}`);
-          navigate("/");
+          setUser(user);
         }}
         onError={(err) => {
           console.log({ err });

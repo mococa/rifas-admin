@@ -1,12 +1,13 @@
 // External
 import React, {
   createContext,
+  useCallback,
   useContext,
   useEffect,
   useMemo,
   useState,
 } from "react";
-import { Navigate, useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import { AxiosError } from "axios";
 
 // Hooks
@@ -17,10 +18,10 @@ import { AuthAPI } from "api/Auth";
 
 // Helpers
 import { deleteAllCookies, getCookie } from "helpers/cookies";
-import { errorHandler } from "helpers/errors";
+import { errorHandler, toastrError } from "helpers/errors";
 
 // Types
-import { User } from "../../@types/User";
+import { User } from "../../_types/User";
 
 // Interfaces
 interface Context {
@@ -37,25 +38,43 @@ export const AuthProvider: React.FC = ({ children }) => {
   // Hooks
   const toastr = useToastr();
   const navigate = useNavigate();
+  const location = useLocation();
 
-  const cookie = getCookie("jwt");
+  const errorHandle = useCallback(
+    (error: AxiosError) => {
+      toastrError(error, toastr.error);
+      navigate("/auth");
+      return;
+    },
+    [navigate, toastr.error]
+  );
 
   // Effects
   useEffect(() => {
+    const clearUser = (error: AxiosError) => {
+      setUser(null);
+      deleteAllCookies();
+      errorHandle(error);
+    };
+
+    const cookie = getCookie("jwt");
+    if (!cookie) {
+      if (location.pathname !== "/auth") navigate("/auth");
+      return;
+    }
+
     const effect = async () => {
-      // try {
-      //   if (!cookie) return;
-      //   const fetchedUser = await AuthAPI.getMe();
-      //   setUser(fetchedUser);
-      // } catch (error) {
-      //   toastr.error(errorHandler(error as AxiosError));
-      //   setUser(null);
-      //   deleteAllCookies();
-      //   navigate("/auth");
-      // }
+      try {
+        if (!user) await AuthAPI.getMe().then(setUser);
+        else {
+          if (location.pathname === "/auth") navigate("/");
+        }
+      } catch (error) {
+        clearUser(error as AxiosError);
+      }
     };
     effect();
-  }, [cookie]);
+  }, [errorHandle, navigate, location, user]);
 
   // Memos
   const value = useMemo(
@@ -65,7 +84,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     }),
     [user]
   );
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

@@ -15,35 +15,57 @@ import {
   RaffleListItem,
   RafflesBody,
 } from "./styles";
+import { Raffle } from "_types/Raffle";
 
 // Interfaces
-interface Props {}
+interface Props {
+  raffles: Raffle[];
+  pagesCount: number;
+  page: number;
+  paginate: (pagesToAdvance: number) => void;
+  onSelect: (raffle: Raffle) => void;
+  selectedRaffle: string;
+  onCreateRaffle: () => void;
+}
 
-export const RafflesList: React.FC<Props> = () => {
+export const RafflesList: React.FC<Props> = ({
+  raffles,
+  pagesCount,
+  page,
+  paginate,
+  onSelect,
+  selectedRaffle,
+  onCreateRaffle,
+}) => {
   return (
     <RaffleListContainer>
       <RaffleActionsHeader>
-        <RoundButton>
+        <RoundButton onClick={onCreateRaffle}>
           <IoAddOutline />
         </RoundButton>
-        <span>1/3</span>
-        <RoundButton>
+        <span>
+          {page + 1}/{pagesCount}
+        </span>
+        <RoundButton disabled={page + 1 <= 1} onClick={() => paginate(-1)}>
           <MdOutlineNavigateBefore />
         </RoundButton>
-        <RoundButton>
+        <RoundButton
+          disabled={page + 1 >= pagesCount}
+          onClick={() => paginate(1)}
+        >
           <MdOutlineNavigateNext />
         </RoundButton>
       </RaffleActionsHeader>
       <RafflesBody>
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
-        <RaffleListItem aria-selected={false} />
+        {raffles.map((raffle) => (
+          <RaffleListItem
+            key={raffle._id}
+            aria-selected={raffle._id === selectedRaffle}
+            onClick={() => onSelect(raffle)}
+          >
+            {raffle.title}
+          </RaffleListItem>
+        ))}
       </RafflesBody>
     </RaffleListContainer>
   );

@@ -1,16 +1,20 @@
 // External
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 // Icons
 import { BsSearch } from "react-icons/bs";
-import {
-  MdLightbulb,
-  MdLogout,
-  MdNightlight,
-  MdPowerSettingsNew,
-  MdWbSunny,
-} from "react-icons/md";
+import { MdLogout, MdNightlight, MdSettings, MdWbSunny } from "react-icons/md";
+
+// Hooks
+import { useDarkMode } from "contexts/DarkMode";
+import { useDialog } from "mococa-dialog";
+
+// Components
+import { RoundButton } from "components/RoundButton";
+
+// Helpers
+import { deleteAllCookies } from "helpers/cookies";
 
 // Styles
 import {
@@ -20,15 +24,16 @@ import {
   SearchBoxInput,
   StyledHeader,
 } from "./styles";
-import { useDarkMode } from "contexts/DarkMode";
-import { RoundButton } from "components/RoundButton";
-import { useDialog } from "mococa-dialog";
-import { deleteAllCookies } from "helpers/cookies";
+//import { useAuth } from "contexts/Auth";
 
-export const Header: React.FC = ({ children }) => {
+export const Header: React.FC = () => {
+  // Context Hooks
+  const navigate = useNavigate();
   const { isDark, toggle } = useDarkMode();
+  //const { setUser } = useAuth();
   const dialog = useDialog();
 
+  // Handlers
   const handleLogoff = () => {
     dialog({
       title: "Sair",
@@ -41,9 +46,14 @@ export const Header: React.FC = ({ children }) => {
       showCrossOnTop: true,
       onContinue() {
         deleteAllCookies();
-        window.location.replace("/auth");
+        //setUser(null);
+        navigate("/auth");
       },
     });
+  };
+
+  const handleSettings = () => {
+    navigate("/settings");
   };
 
   return (
@@ -56,6 +66,9 @@ export const Header: React.FC = ({ children }) => {
         <SearchBoxInput placeholder="Procure um usuário ou rifa" />
       </SearchBox>
       <HeaderActionButtons>
+        <RoundButton onClick={handleSettings}>
+          <MdSettings />
+        </RoundButton>
         <RoundButton onClick={toggle}>
           {isDark ? <MdWbSunny /> : <MdNightlight />}
         </RoundButton>

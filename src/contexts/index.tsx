@@ -7,15 +7,18 @@ import { BrowserRouter } from "react-router-dom";
 // Providers
 import { AuthProvider } from "./Auth";
 import { DarkModeProvider } from "./DarkMode";
+import { DialogProvider as CDialogProvider } from "./Dialog";
 
 export const AppProvider: React.FC = ({ children }) => (
   <ToastrProvider>
-    <DialogProvider>
-      <BrowserRouter>
-        <DarkModeProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </DarkModeProvider>
-      </BrowserRouter>
-    </DialogProvider>
+    <CDialogProvider>
+      <DialogProvider>
+        <BrowserRouter>
+          <DarkModeProvider>
+            <AuthProvider>{children}</AuthProvider>
+          </DarkModeProvider>
+        </BrowserRouter>
+      </DialogProvider>
+    </CDialogProvider>
   </ToastrProvider>
 );

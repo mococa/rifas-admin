@@ -14,7 +14,7 @@ export const Form: React.FC<Props> = ({ children, onSubmit }) => {
     onSubmit();
   };
   return (
-    <FormContainer autoComplete="off" onSubmit={handleOnSubmit}>
+    <FormContainer onSubmit={handleOnSubmit}>
       {children}
     </FormContainer>
   );

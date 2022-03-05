@@ -12,12 +12,19 @@ export const StyledRoundButton = styled.button`
 
   transition: 150ms;
 
-  :hover {
+  :not(:disabled):hover {
     background-color: rgba(0, 0, 0, 0.1);
   }
 
-  :active {
+  :not(:disabled):active {
     background-color: rgba(0, 0, 0, 0.2);
+  }
+
+  :disabled {
+    cursor: default;
+    background-color: rgba(0, 0, 0, 0.075);
+
+    color: rgba(0, 0, 0, 0.5);
   }
 
   padding: 8px;

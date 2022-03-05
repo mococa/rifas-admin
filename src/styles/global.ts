@@ -6,17 +6,40 @@ export const global = createGlobalStyle`
     padding: 0;
     outline: 0;
     box-sizing: border-box;
+
+    ::-webkit-scrollbar {
+      width: 10px;
+
+    }
+    
+    ::-webkit-scrollbar-track {
+      background-color: rgba(0, 0, 0, 0.05);
+    }
+    
+    ::-webkit-scrollbar-thumb {
+      background-color: rgba(0, 0, 0, 0.1);
+      border-radius: 4px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: rgba(0, 0, 0, 0.25);
+    }
   }
 
   html {
     scroll-behavior:smooth;
     scroll-margin-top: -100px;
+    --border-color: #0000001f;
+    --theme-color: #ffffff;
   }
 
   html.dark{
     background: #313131;
 
     color: white;
+
+    --border-color: #ffffff1f;
+    --theme-color: #0f0f0f;
   }
 
   #root{
@@ -126,6 +149,11 @@ export const global = createGlobalStyle`
 
   .modals-container{
     color: #272727;
+  }
+
+  .modals-container > div > div {
+    height: unset;
+    min-height: 200px;
   }
 
   .wave {

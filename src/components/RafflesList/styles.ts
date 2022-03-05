@@ -1,6 +1,5 @@
 import { Devices } from "../../common/breakpoints/index";
 import styled from "styled-components/macro";
-import { StyledRoundButton } from "components/RoundButton/styles";
 
 export const RaffleListContainer = styled.aside`
   display: flex;
@@ -26,9 +25,11 @@ export const RaffleActionsHeader = styled.header`
 
   padding: 0 12px;
 
-  height: 80px;
+  height: 50px;
 
   background: rgba(0, 0, 0, 0.1);
+
+  gap: 4px;
 
   span {
     margin-left: auto;
@@ -44,6 +45,8 @@ export const RafflesBody = styled.div`
   flex-flow: column;
   gap: 12px;
 
+  height: fill-available;
+
   padding: 16px 8px;
 
   overflow-y: auto;
@@ -51,6 +54,9 @@ export const RafflesBody = styled.div`
 
 export const RaffleListItem = styled.div`
   display: flex;
+  align-items: center;
+
+  padding: 12px;
 
   min-height: 72px;
 
