@@ -11,12 +11,14 @@ import { getSections } from "helpers/sections";
 
 // Styles
 import { CardsContainer, MainContainer } from "./styles";
+import { useAuth } from "contexts/Auth";
 
 export const MainPage: React.FC = () => {
+  const { user } = useAuth();
   return (
     <PageTemplate>
       <MainContainer>
-        <Welcome name="Eliel" />
+        <Welcome name={user?.name || ""} />
         <CardsContainer>
           {getSections.map((section) => (
             <Card key={section.id} {...section} />

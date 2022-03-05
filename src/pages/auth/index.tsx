@@ -11,6 +11,7 @@ import { deleteAllCookies } from "helpers/cookies";
 import { useToastr } from "mococa-toastr";
 import { useNavigate } from "react-router";
 import { useAuth } from "contexts/Auth";
+import { AuthContainer } from "./styles";
 
 export const AuthPage = () => {
   // Hooks
@@ -19,11 +20,7 @@ export const AuthPage = () => {
   const navigate = useNavigate();
 
   return (
-    <div
-      style={{
-        padding: 24,
-      }}
-    >
+    <AuthContainer>
       <FormAuth
         onLogin={(user) => {
           toastr.success("Sucesso!", `Bem vindo(a), ${user.name}`);
@@ -35,6 +32,6 @@ export const AuthPage = () => {
           deleteAllCookies();
         }}
       />
-    </div>
+    </AuthContainer>
   );
 };
