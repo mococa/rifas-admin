@@ -1,12 +1,10 @@
-import { AuthPage } from "pages/auth";
-import { MainPage } from "pages/main";
-import { RafflesPage } from "pages/raffles";
-import React from "react";
-import { Routes, Route } from "react-router-dom";
+import { AuthPage } from 'pages/auth';
+import { MainPage } from 'pages/main';
+import { RafflesPage } from 'pages/raffles';
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
 
-interface Props {}
-
-export const Router: React.FC<Props> = ({ children }) => {
+export const Router: React.FC = () => {
   return (
     <Routes>
       <Route path="/auth" element={<AuthPage />} />

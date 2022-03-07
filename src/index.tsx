@@ -1,15 +1,15 @@
 // External
-import React from "react";
-import ReactDOM from "react-dom";
+import React from 'react';
+import ReactDOM from 'react-dom';
 
 // Styles
-import { global as Global } from "styles/global";
+import { global as Global } from 'styles/global';
 
 // Routers
-import { Router } from "pages/Router/index";
+import { Router } from 'pages/Router/index';
 
 // Providers
-import { AppProvider } from "contexts";
+import { AppProvider } from 'contexts';
 
 ReactDOM.render(
   <React.StrictMode>
@@ -18,5 +18,5 @@ ReactDOM.render(
       <Router />
     </AppProvider>
   </React.StrictMode>,
-  document.getElementById("root")
+  document.getElementById('root')
 );

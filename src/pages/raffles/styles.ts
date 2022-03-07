@@ -1,5 +1,5 @@
-import styled from "styled-components/macro";
-import { Devices } from "./../../common/breakpoints/index";
+import styled from 'styled-components/macro';
+import { Devices } from 'common/breakpoints/index';
 
 export const RafflesContainer = styled.div`
   display: flex;

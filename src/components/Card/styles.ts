@@ -1,7 +1,12 @@
-import { Devices } from "./../../common/breakpoints/index";
-import styled, { css } from "styled-components/macro";
-import { transparentize } from "polished";
-import { CardColor } from "enums/colors";
+// External
+import styled from 'styled-components/macro';
+import { transparentize } from 'polished';
+
+// Common
+import { Devices } from 'common/breakpoints/index';
+
+// Enums
+import { CardColor } from 'enums/colors';
 
 export const StyledCard = styled.button`
   display: flex;
@@ -10,20 +15,20 @@ export const StyledCard = styled.button`
 
   height: 200px;
   width: 200px;
-  
+
   padding: 12px;
-  
+
   border: none;
   border-radius: 16px;
 
   background: ${(props) =>
     transparentize(
       0.9,
-      CardColor[(props["aria-label"] as keyof typeof CardColor) || "green"]
+      CardColor[(props['aria-label'] as keyof typeof CardColor) || 'green']
     )};
 
   color: ${(props) =>
-    CardColor[(props["aria-label"] as keyof typeof CardColor) || "green"]};
+    CardColor[(props['aria-label'] as keyof typeof CardColor) || 'green']};
 
   cursor: pointer;
   user-select: none;
@@ -34,7 +39,7 @@ export const StyledCard = styled.button`
     background: ${(props) =>
       transparentize(
         0.7,
-        CardColor[(props["aria-label"] as keyof typeof CardColor) || "green"]
+        CardColor[(props['aria-label'] as keyof typeof CardColor) || 'green']
       )};
   }
   :active {

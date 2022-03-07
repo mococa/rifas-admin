@@ -1,5 +1,4 @@
-import { Meta } from "./../QueryMeta/index";
-import { User } from "_types/User";
+import { User } from '_types/User';
 
 export interface Raffle {
   _id: string;

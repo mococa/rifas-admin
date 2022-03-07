@@ -1,8 +1,8 @@
 // External
-import React from "react";
+import React from 'react';
 
 // Styles
-import { WelcomeBox } from "./styles";
+import { WelcomeBox } from './styles';
 
 // Interfaces
 interface Props {

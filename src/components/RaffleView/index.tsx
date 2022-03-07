@@ -1,5 +1,32 @@
 // External
-import React from "react";
+import React from 'react';
+
+// Types
+import { Raffle } from '_types/Raffle';
+
+// API
+import { RafflesAPI } from 'api/Raffles';
+
+// Icons
+import {
+  MdArrowBack,
+  MdDelete,
+  MdModeEdit,
+  MdPeople,
+  MdPerson,
+} from 'react-icons/md';
+import { IoTicketOutline, IoTrophy } from 'react-icons/io5';
+import { BsClockFill } from 'react-icons/bs';
+
+// Components
+import { RoundButton } from 'components/RoundButton';
+
+// Hooks
+import { useToastr } from 'mococa-toastr';
+
+// Helpers
+import { toastrError } from 'helpers/errors';
+import { moneyfy } from 'helpers/number';
 
 // Styles
 import {
@@ -7,28 +34,31 @@ import {
   CreatedAt,
   CreatedBy,
   DescriptionLabel,
+  Prizes,
+  RaffleActionButtons,
   RaffleActive,
   RaffleId,
   RaffleTitle,
   RaffleViewContainer,
   TicketPrice,
-} from "./styles";
-import { Raffle } from "_types/Raffle";
-import { MdPeople, MdPerson } from "react-icons/md";
-import { IoTicketOutline } from "react-icons/io5";
-import { BsClockFill } from "react-icons/bs";
-import { RoundButton } from "components/RoundButton";
-import { RafflesAPI } from "api/Raffles";
-import { useToastr } from "mococa-toastr";
-import { toastrError } from "helpers/errors";
+} from './styles';
 
 // Interfaces
 interface Props {
   raffle?: Raffle;
   changeRaffleStatus: (raffleId: string) => void;
+  onEdit: (raffleId: string) => void;
+  onDelete: (raffleId: string) => void;
+  onClearSelection: () => void;
 }
 
-export const RaffleView: React.FC<Props> = ({ raffle, changeRaffleStatus }) => {
+export const RaffleView: React.FC<Props> = ({
+  raffle,
+  changeRaffleStatus,
+  onEdit,
+  onClearSelection,
+  onDelete,
+}) => {
   const toastr = useToastr();
 
   const handleRaffleTick = () => {
@@ -36,37 +66,50 @@ export const RaffleView: React.FC<Props> = ({ raffle, changeRaffleStatus }) => {
       RafflesAPI.tick(raffle)
         .then(() => {
           toastr.success(
-            "Pronto!",
-            `Rifa ${raffle.active ? "des" : ""}ativada com sucesso`
+            'Pronto!',
+            `Rifa ${raffle.active ? 'des' : ''}ativada com sucesso`
           );
           changeRaffleStatus(raffle._id);
         })
         .catch((err) => toastrError(err, toastr.error));
   };
+
+  const handleRaffleEdit = () => {
+    onEdit(raffle?._id || '');
+  };
+
   if (!raffle) return <RaffleViewContainer />;
+
   return (
-    <RaffleViewContainer>
+    <RaffleViewContainer aria-current={!!raffle}>
       <RaffleTitle>
+        <RoundButton onClick={onClearSelection}>
+          <MdArrowBack />
+        </RoundButton>
         <p title="Título">{raffle.title}</p>
         <RaffleId title="ID da rifa">#{raffle._id}</RaffleId>
-        <RoundButton onClick={handleRaffleTick}>
-          <RaffleActive
-            aria-current={raffle.active}
-            title={raffle.active ? "Rifa ativa" : "Rifa desativada"}
-          />
-        </RoundButton>
+        <RaffleActionButtons>
+          <RoundButton onClick={() => onDelete(raffle._id)}>
+            <MdDelete />
+          </RoundButton>
+          <RoundButton onClick={handleRaffleEdit}>
+            <MdModeEdit />
+          </RoundButton>
+          <RoundButton onClick={handleRaffleTick}>
+            <RaffleActive
+              aria-current={raffle.active}
+              title={raffle.active ? 'Rifa ativa' : 'Rifa desativada'}
+            />
+          </RoundButton>
+        </RaffleActionButtons>
       </RaffleTitle>
       <CreatedBy>
         <MdPerson />
-        Rifa criada por: <span>{raffle.createdBy?.name}</span>
+        Rifa criada por: <b>{raffle.createdBy?.name}</b>
       </CreatedBy>
       <TicketPrice>
         <IoTicketOutline />
-        Preço:{" "}
-        {raffle.ticketPrice?.toLocaleString("pt-BR", {
-          style: "currency",
-          currency: "BRL",
-        })}
+        Preço: {moneyfy(Number(raffle.ticketPrice))}
       </TicketPrice>
       <Capacity>
         <MdPeople />
@@ -74,19 +117,23 @@ export const RaffleView: React.FC<Props> = ({ raffle, changeRaffleStatus }) => {
       </Capacity>
       <CreatedAt>
         <BsClockFill />
-        Criada em:{" "}
+        Criada em:{' '}
         {new Date(raffle.createdAt || 0)
-          .toLocaleString("pt-BR", {
-            year: "numeric",
-            month: "numeric",
-            day: "numeric",
-            hour: "2-digit",
-            minute: "2-digit",
+          .toLocaleString('pt-BR', {
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
           })
-          .split(" ")
-          .join(", ")}
+          .split(' ')
+          .join(', ')}
       </CreatedAt>
       <DescriptionLabel>Ver descrição</DescriptionLabel>
+      <Prizes>
+        <IoTrophy />
+        Prêmios: {raffle.prizes?.map(moneyfy).join('; ')}
+      </Prizes>
     </RaffleViewContainer>
   );
 };

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle } from 'styled-components';
 
 export const global = createGlobalStyle`
   * {
@@ -40,6 +40,8 @@ export const global = createGlobalStyle`
 
     --border-color: #ffffff1f;
     --theme-color: #0f0f0f;
+
+    color-scheme: dark;
   }
 
   #root{
@@ -107,6 +109,7 @@ export const global = createGlobalStyle`
     --secondary: #DB4F62;
     --white: #ffffff;
     --white500: #dedede;
+    --white700: #a3a3a3;
 
     --red: #eb3b53;
     --blue: #4790b8;

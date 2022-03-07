@@ -1,5 +1,5 @@
-import { Devices } from "./../../common/breakpoints/index";
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
+import { Devices } from 'common/breakpoints';
 
 export const AuthContainer = styled.div`
   display: flex;
@@ -12,9 +12,9 @@ export const AuthContainer = styled.div`
     margin-right: auto;
     margin-top: 36px;
   }
-  @media(${Devices.mobile}){
-      margin-left: 0;
-      margin-right: 0;
-      margin-top: 16px;
+  @media (${Devices.mobile}) {
+    margin-left: 0;
+    margin-right: 0;
+    margin-top: 16px;
   }
 `;

@@ -1,12 +1,14 @@
-import axios from "axios";
-const prod = window.location.hostname !== "localhost";
-const baseURL = prod ? process.env.REACT_APP_BLOG_API : "http://localhost:4000";
+// External
+import axios from 'axios';
+
+const prod = window.location.hostname !== 'localhost';
+const baseURL = prod ? process.env.REACT_APP_BLOG_API : 'http://localhost:4000';
 
 const Axios = axios.create({
   baseURL,
   withCredentials: true,
   headers: {
-    "Content-Type": "application/json",
+    'Content-Type': 'application/json',
   },
 });
 export const request = {
@@ -17,7 +19,7 @@ export const request = {
         throw err;
       });
   },
-  post: async (path: string, body: {}) => {
+  post: async (path: string, body: object) => {
     return Axios.post(path, body)
       .then(({ data }) => data)
       .catch((err) => {
@@ -31,15 +33,15 @@ export const request = {
         throw err;
       });
   },
-  patch: async (path: string, data = {}) => {
-    return Axios.patch(path, data)
+  patch: async (path: string, body = {}) => {
+    return Axios.patch(path, body)
       .then(({ data }) => data)
       .catch((err) => {
         throw err;
       });
   },
-  put: async (path: string, data = {}) => {
-    return Axios.put(path, data)
+  put: async (path: string, body = {}) => {
+    return Axios.put(path, body)
       .then(({ data }) => data)
       .catch((err) => {
         throw err;

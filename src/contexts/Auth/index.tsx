@@ -6,22 +6,22 @@ import React, {
   useEffect,
   useMemo,
   useState,
-} from "react";
-import { useLocation, useNavigate } from "react-router";
-import { AxiosError } from "axios";
+} from 'react';
+import { AxiosError } from 'axios';
 
 // Hooks
-import { useToastr } from "mococa-toastr";
+import { useToastr } from 'mococa-toastr';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 // APIs
-import { AuthAPI } from "api/Auth";
+import { AuthAPI } from 'api/Auth';
 
 // Helpers
-import { deleteAllCookies, getCookie } from "helpers/cookies";
-import { errorHandler, toastrError } from "helpers/errors";
+import { deleteAllCookies, getCookie } from 'helpers/cookies';
+import { toastrError } from 'helpers/errors';
 
 // Types
-import { User } from "../../_types/User";
+import { User } from '../../_types/User';
 
 // Interfaces
 interface Context {
@@ -43,8 +43,7 @@ export const AuthProvider: React.FC = ({ children }) => {
   const errorHandle = useCallback(
     (error: AxiosError) => {
       toastrError(error, toastr.error);
-      navigate("/auth");
-      return;
+      navigate('/auth');
     },
     [navigate, toastr.error]
   );
@@ -57,18 +56,16 @@ export const AuthProvider: React.FC = ({ children }) => {
       errorHandle(error);
     };
 
-    const cookie = getCookie("jwt");
+    const cookie = getCookie('jwt');
     if (!cookie) {
-      if (location.pathname !== "/auth") navigate("/auth");
+      if (location.pathname !== '/auth') navigate('/auth');
       return;
     }
 
     const effect = async () => {
       try {
         if (!user) await AuthAPI.getMe().then(setUser);
-        else {
-          if (location.pathname === "/auth") navigate("/");
-        }
+        else if (location.pathname === '/auth') navigate('/');
       } catch (error) {
         clearUser(error as AxiosError);
       }
@@ -90,6 +87,6 @@ export const AuthProvider: React.FC = ({ children }) => {
 // Hooks
 export const useAuth = () => {
   const ctx = useContext(AuthContext);
-  if (!ctx) throw new Error("");
+  if (!ctx) throw new Error('');
   return ctx;
 };

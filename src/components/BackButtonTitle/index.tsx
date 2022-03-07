@@ -1,15 +1,15 @@
 // External
-import React from "react";
-import { Link } from "react-router-dom";
+import React from 'react';
+import { Link } from 'react-router-dom';
 
 // Icons
-import { IoArrowBack } from "react-icons/io5";
+import { IoArrowBack } from 'react-icons/io5';
 
 // Components
-import { RoundButton } from "components/RoundButton";
+import { RoundButton } from 'components/RoundButton';
 
 // Styles
-import { BackButtonContainer } from "./styles";
+import { BackButtonContainer } from './styles';
 
 // Interfaces
 interface Props {

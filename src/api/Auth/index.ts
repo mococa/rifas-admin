@@ -1,14 +1,15 @@
 // API
-import { request } from "./../index";
+import { request } from 'api';
 
 // Interfaces
-import { LoginFields } from "_types/Auth/index";
+import { LoginFields } from '_types/Auth/index';
 
 export class AuthAPI {
   static login({ email, password }: LoginFields) {
-    return request.post("/auth/sign-in", { email, password });
+    return request.post('/auth/sign-in', { email, password });
   }
+
   static getMe() {
-    return request.get("/auth/me");
+    return request.get('/auth/me');
   }
 }

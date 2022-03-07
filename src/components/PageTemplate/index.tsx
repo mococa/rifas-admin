@@ -1,20 +1,19 @@
 // External
-import React, { useEffect } from "react";
-import { useNavigate } from "react-router";
+import React from 'react';
 
 // Components
-import { Header } from "components/Header";
-import { Sidebar } from "components/Sidebar";
-import { BackButtonTitle } from "components/BackButtonTitle";
+import { Header } from 'components/Header';
+import { Sidebar } from 'components/Sidebar';
+import { BackButtonTitle } from 'components/BackButtonTitle';
 
 // Hooks
-import { useAuth } from "contexts/Auth";
+// import { useAuth } from 'contexts/Auth';
 
 // Helpers
-import { getCookie } from "helpers/cookies";
+// import { getCookie } from 'helpers/cookies';
 
 // Styles
-import { ChildrenContainer, PageContainer, PageWrapper } from "./styles";
+import { ChildrenContainer, PageContainer, PageWrapper } from './styles';
 
 // Interfaces
 interface Props {

@@ -1,34 +1,34 @@
 // External
-import React from "react";
+import React from 'react';
 
 // Components
-import { FormAuth } from "components/FormAuth";
+import { FormAuth } from 'components/FormAuth';
 
 // Helpers
-import { deleteAllCookies } from "helpers/cookies";
+import { deleteAllCookies } from 'helpers/cookies';
 
 // Hooks
-import { useToastr } from "mococa-toastr";
-import { useNavigate } from "react-router";
-import { useAuth } from "contexts/Auth";
-import { AuthContainer } from "./styles";
+import { useToastr } from 'mococa-toastr';
+import { useAuth } from 'contexts/Auth';
+
+// Styles
+import { AuthContainer } from './styles';
 
 export const AuthPage = () => {
   // Hooks
   const toastr = useToastr();
   const { setUser } = useAuth();
-  const navigate = useNavigate();
 
   return (
     <AuthContainer>
       <FormAuth
         onLogin={(user) => {
-          toastr.success("Sucesso!", `Bem vindo(a), ${user.name}`);
+          toastr.success('Sucesso!', `Bem vindo(a), ${user.name}`);
           setUser(user);
         }}
         onError={(err) => {
-          console.log({ err });
-          toastr.error("Oops!", err);
+          console.error(err);
+          toastr.error('Oops!', err);
           deleteAllCookies();
         }}
       />

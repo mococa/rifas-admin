@@ -1,8 +1,8 @@
 /* ---------- External ---------- */
-import React from "react";
+import React from 'react';
 
 /* ---------- Styles ---------- */
-import { FormContainer } from "./styles";
+import { FormContainer } from './styles';
 
 interface Props {
   onSubmit(): void;
@@ -13,9 +13,5 @@ export const Form: React.FC<Props> = ({ children, onSubmit }) => {
     e.preventDefault();
     onSubmit();
   };
-  return (
-    <FormContainer onSubmit={handleOnSubmit}>
-      {children}
-    </FormContainer>
-  );
+  return <FormContainer onSubmit={handleOnSubmit}>{children}</FormContainer>;
 };

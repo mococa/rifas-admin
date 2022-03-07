@@ -5,7 +5,7 @@ import React, {
   useEffect,
   useMemo,
   useState,
-} from "react";
+} from 'react';
 
 // Interfaces
 interface Context {
@@ -21,18 +21,18 @@ export const DarkModeProvider: React.FC = ({ children }) => {
 
   const handleToggleClass = (adding: boolean, classList?: DOMTokenList) => {
     if (!classList) return;
-    if (adding && !classList.contains("dark")) classList.add("dark");
-    else classList.remove("dark");
+    if (adding && !classList.contains('dark')) classList.add('dark');
+    else classList.remove('dark');
   };
 
   // Effects
   useEffect(() => {
-    const localStorageDark = Boolean(localStorage.getItem("dark") === "true");
+    const localStorageDark = Boolean(localStorage.getItem('dark') === 'true');
     setDark(localStorageDark);
   }, []);
 
   useEffect(() => {
-    localStorage.setItem("dark", String(dark));
+    localStorage.setItem('dark', String(dark));
     handleToggleClass(dark, document.body.parentElement?.classList);
   }, [dark]);
 
@@ -57,6 +57,6 @@ export const DarkModeProvider: React.FC = ({ children }) => {
 // Hooks
 export const useDarkMode = () => {
   const ctx = useContext(DarkModeContext);
-  if (!ctx) throw new Error("");
+  if (!ctx) throw new Error('');
   return ctx;
 };

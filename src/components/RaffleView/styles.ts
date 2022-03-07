@@ -1,5 +1,5 @@
-import { Devices } from "./../../common/breakpoints/index";
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
+import { Devices } from 'common/breakpoints';
 
 export const RaffleViewContainer = styled.div`
   display: flex;
@@ -16,7 +16,22 @@ export const RaffleViewContainer = styled.div`
 
   @media (${Devices.tablet}) {
     position: fixed;
-    right: 0;
+    right: -100%;
+
+    background: var(--theme-color);
+    width: fill-available;
+    margin: 0 12px;
+    min-height: 400px;
+
+    &[aria-current='true'] {
+      right: 0;
+    }
+  }
+
+  @media (${Devices.mobile}) {
+    &[aria-current='true'] {
+      filter: drop-shadow(0px 1px 2px rgba(0, 0, 0, 0.2));
+    }
   }
 `;
 
@@ -33,27 +48,33 @@ export const RaffleTitle = styled.header`
   font-weight: 600;
 
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
-
-  button {
-    position: absolute;
-    right: 12px;
-  }
 `;
 
 export const RaffleId = styled.span`
   font-size: 1rem;
-  color: rgba(0, 0, 0, 0.5);
+  opacity: 0.4;
+
+  @media (${Devices.mobile}) {
+    display: none;
+  }
+`;
+
+export const RaffleActionButtons = styled.div`
+  display: flex;
+  gap: 8px;
+
+  margin-left: auto;
 `;
 
 export const RaffleActive = styled.div`
-  width: 16px;
-  height: 16px;
+  width: 1.25rem;
+  height: 1.25rem;
 
   border-radius: 50%;
 
   background-color: var(--red);
 
-  &[aria-current="true"] {
+  &[aria-current='true'] {
     background-color: var(--green);
   }
 `;
@@ -65,11 +86,8 @@ export const Row = styled.div`
 
   margin-top: 8px;
 `;
-export const CreatedBy = styled(Row)`
-  span {
-    font-weight: 600;
-  }
-`;
+
+export const CreatedBy = styled(Row)``;
 
 export const TicketPrice = styled(Row)``;
 
@@ -84,3 +102,5 @@ export const DescriptionLabel = styled.b`
 
   color: var(--blue);
 `;
+
+export const Prizes = styled(Row)``;

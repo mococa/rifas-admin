@@ -1,5 +1,5 @@
-import { Devices } from "../../common/breakpoints/index";
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
+import { Devices } from 'common/breakpoints/index';
 
 export const RaffleListContainer = styled.aside`
   display: flex;
@@ -72,7 +72,7 @@ export const RaffleListItem = styled.div`
     background-color: rgba(0, 0, 0, 0.25);
   }
 
-  &[aria-selected="true"] {
+  &[aria-selected='true'] {
     background-color: rgba(0, 0, 120, 0.1);
 
     :hover {

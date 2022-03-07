@@ -1,8 +1,8 @@
 // External
-import React from "react";
+import React from 'react';
 
 // Styles
-import { StyledRoundButton } from "./styles";
+import { StyledRoundButton } from './styles';
 
 // Interfaces
 interface Props {

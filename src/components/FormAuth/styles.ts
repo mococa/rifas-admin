@@ -1,5 +1,5 @@
-import { Devices } from "./../../common/breakpoints/index";
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
+import { Devices } from 'common/breakpoints/index';
 
 export const FormAuthContainer = styled.div`
   display: flex;

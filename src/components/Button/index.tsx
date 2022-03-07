@@ -1,13 +1,14 @@
 // External
-import React from "react";
+import { CSSColors } from 'enums/colors';
+import React from 'react';
 
 // Styles
-import { StyledButton } from "./styles";
+import { StyledButton } from './styles';
 
 // Interfaces
 interface Props {
   onClick?: React.MouseEventHandler<HTMLButtonElement>;
-  color?: "red" | "blue" | "green";
+  color?: keyof typeof CSSColors;
   disabled?: boolean;
 }
 

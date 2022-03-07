@@ -1,4 +1,4 @@
-import styled, { keyframes } from "styled-components/macro";
+import styled, { keyframes } from 'styled-components/macro';
 
 const spin = keyframes`
     from {
@@ -14,7 +14,7 @@ export const LoadingContainer = styled.div`
   justify-content: center;
   align-items: center;
 
-  font-size: ${(props) => props["aria-setsize"] || 16}px;
+  font-size: ${(props) => props['aria-setsize'] || 16}px;
 
   animation: ${spin} 0.6s ease-out infinite;
 `;

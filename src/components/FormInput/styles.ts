@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
 
 export const InputContainer = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ export const InputContainer = styled.div`
     background: 0;
   }
 
-  &[aria-current="true"],
+  &[aria-current='true'],
   :focus-within {
     label {
       transform: scale(0.7);
@@ -32,7 +32,7 @@ export const InputContainer = styled.div`
       top: 3px;
     }
 
-    input {
+    input:not([type='button']) {
       padding-top: 18px;
       padding-bottom: 6px;
       padding-left: 10px;
@@ -82,6 +82,21 @@ export const Input = styled.input`
   padding: 10px 8px;
 
   border: none;
+
+  &[type='button'] {
+    cursor: pointer;
+    background-color: var(--theme-color);
+    padding: 0;
+
+    :hover {
+      filter: brightness(95%);
+    }
+    :active {
+      filter: brightness(90%);
+    }
+  }
+
+  border-radius: 4px;
 
   ::placeholder {
     transition: 150ms;

@@ -1,4 +1,4 @@
-import styled from "styled-components/macro";
+import styled from 'styled-components/macro';
 
 export const StyledButton = styled.button`
   border: none;
@@ -6,10 +6,13 @@ export const StyledButton = styled.button`
 
   height: 48px;
 
-  background-color: var(--${(props) => props.color || "green"});
+  background-color: var(--${(props) => props.color || 'green'});
 
   color: white;
   font-weight: 500;
+  &[color^='white'] {
+    color: #272727;
+  }
 
   padding: 8px;
 
@@ -22,7 +25,7 @@ export const StyledButton = styled.button`
       filter: brightness(90%);
     }
   }
-  
+
   :disabled {
     cursor: auto;
 

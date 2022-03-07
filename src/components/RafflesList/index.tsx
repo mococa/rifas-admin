@@ -1,12 +1,15 @@
 // External
-import React from "react";
+import React from 'react';
 
 // Icons
-import { IoAddOutline } from "react-icons/io5";
-import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from "react-icons/md";
+import { IoAddOutline } from 'react-icons/io5';
+import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from 'react-icons/md';
 
 // Components
-import { RoundButton } from "components/RoundButton";
+import { RoundButton } from 'components/RoundButton';
+
+// Types
+import { Raffle } from '_types/Raffle';
 
 // Styles
 import {
@@ -14,8 +17,7 @@ import {
   RaffleListContainer,
   RaffleListItem,
   RafflesBody,
-} from "./styles";
-import { Raffle } from "_types/Raffle";
+} from './styles';
 
 // Interfaces
 interface Props {

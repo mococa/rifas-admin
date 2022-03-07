@@ -1,6 +1,6 @@
-import { Devices } from "./../../common/breakpoints/index";
-import { CardColor } from "enums/colors";
-import styled, { css } from "styled-components/macro";
+import styled, { css } from 'styled-components/macro';
+import { Devices } from 'common/breakpoints/index';
+import { CardColor } from 'enums/colors';
 
 export const SidebarContainer = styled.aside`
   display: flex;
@@ -49,7 +49,7 @@ export const SidebarItem = styled.button`
     align-items: center;
     justify-content: center;
 
-    color: ${CardColor[(color || "green") as keyof typeof CardColor]};
+    color: ${CardColor[(color || 'green') as keyof typeof CardColor]};
 
     padding: 16px;
 

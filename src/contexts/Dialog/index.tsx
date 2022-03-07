@@ -1,7 +1,7 @@
 /* ---------- External ---------- */
-import { Dialog } from "components/Dialog";
-import React, { createContext, useContext, useMemo, useState } from "react";
-import { DialogProps } from "_types/Dialog";
+import { Dialog } from 'components/Dialog';
+import React, { createContext, useContext, useMemo, useState } from 'react';
+import { DialogProps } from '_types/Dialog';
 
 /* ---------- Interfaces ---------- */
 interface Props {
@@ -46,7 +46,7 @@ export const DialogProvider: React.FC = ({ children }) => {
 export const useDialog = () => {
   const context = useContext(DialogContext);
   if (!context) {
-    throw new Error("");
+    throw new Error('');
   }
 
   return context;
