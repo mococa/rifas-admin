@@ -9,7 +9,8 @@ import { CSSColors } from 'enums/colors';
 
 interface Props {
   fields: Input[];
-  onSubmit: (values: unknown) => Promise<void>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  onSubmit: (values: any) => Promise<void>;
   submitButtonText: string;
   buttonColor?: keyof typeof CSSColors;
 }
