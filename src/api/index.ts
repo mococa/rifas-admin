@@ -2,7 +2,9 @@
 import axios from 'axios';
 
 const prod = window.location.hostname !== 'localhost';
-const baseURL = prod ? process.env.REACT_APP_BLOG_API : 'http://localhost:4000';
+const baseURL = prod
+  ? String(import.meta.env.VITE_BLOG_API)
+  : 'http://localhost:4000';
 
 const Axios = axios.create({
   baseURL,
