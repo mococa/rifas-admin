@@ -21,6 +21,11 @@ export const ChildrenContainer = styled.div`
 
   padding: 36px 24px 0;
 
+  > div:nth-of-type(2) {
+    height: calc(100vh - 142px);
+    padding: 24px 0;
+  }
+
   @media (${Devices.mobile}) {
     padding: 16px 8px 0;
   }
