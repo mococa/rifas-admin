@@ -1,12 +1,12 @@
 // API
 import { request } from 'api';
+import { Pagination } from '_types/Generics';
 
 // Types
-import { Meta } from '_types/QueryMeta';
 import { Raffle, RaffleFields } from '_types/Raffle';
 
 export class RafflesAPI {
-  static get(page: number): Promise<{ items: Raffle[]; meta: Meta }> {
+  static get(page: number): Promise<Pagination<Raffle>> {
     return request.get(`/raffles?page=${page}`);
   }
 
