@@ -78,12 +78,12 @@ export const raffleInputs = () =>
 
 export const editRaffleInputs = (raffle: Raffle) =>
   [...raffleInputs()].map((input) => {
-    if (input.name === 'prizes') {
-      input.defaultValue = (input.defaultValue || '').replace(/,/g, '; ');
-    }
     Object.keys(raffle).forEach((key) => {
       if (key === input.name) {
         input.defaultValue = String(raffle[key as keyof Raffle]) || '';
+      }
+      if (input.name === 'prizes') {
+        input.defaultValue = (input.defaultValue || '').replace(/,/g, '; ');
       }
     });
     return input;
