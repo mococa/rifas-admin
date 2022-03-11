@@ -10,6 +10,7 @@ import { RafflesAPI } from 'api/Raffles';
 
 // Helpers
 import { toastrError } from 'helpers/errors';
+import { handlePaginate, slicePagination } from 'helpers/pagination';
 import { editRaffleInputs, raffleInputs } from 'helpers/inputs';
 
 // Hooks
@@ -25,17 +26,21 @@ import { FormCreator } from 'components/FormCreator';
 // Styles
 import { RafflesContainer } from './styles';
 
+// Constants
+const itemsPerPage = 9;
+
 export const RafflesPage: React.FC = () => {
+  // States
   const [page, setPage] = useState(0);
   const [pagesCount, setPagesCount] = useState<number | undefined>(1);
   const [raffles, setRaffles] = useState<Raffle[]>([]);
   const [selectedRaffle, setSelectedRaffle] = useState<string>('');
 
-  const itemsPerPage = 9;
-
+  // Context Hooks
   const toastr = useToastr();
   const { createDialog, dismissDialog } = useDialog();
 
+  // Effects
   useEffect(() => {
     RafflesAPI.get(page)
       .then(({ items, meta }) => {
@@ -48,24 +53,19 @@ export const RafflesPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const handlePaginate = (pagination: number) => {
-    // If paginate back
-    if (pagination < 0) return setPage((_page) => _page - 1);
-
-    // If paginate forwards, but it was already fetched before
-    if (raffles.length > (page + 1) * itemsPerPage)
-      return setPage((_page) => _page + 1);
-
-    // If paginate forwards a not fetched page
-    return RafflesAPI.get(page + 1)
-      .then(({ items, meta }) => {
-        setPagesCount(meta.pages);
-        setRaffles((prevRaffles) => [...prevRaffles, ...items]);
-        setPage((_page) => _page + 1);
-      })
-      .catch((err) => {
-        toastrError(err, toastr.error);
-      });
+  // Handlers
+  const handlePagination = (pagination: number) => {
+    if (pagination < 0 && page + 1 <= 1) return;
+    handlePaginate({
+      pagination,
+      apiFetch: RafflesAPI.get,
+      currentPage: page,
+      items: raffles,
+      setItems: setRaffles,
+      setPage,
+      setPagesCount,
+      itemsPerPage,
+    });
   };
 
   const handleSelectRaffle = (raffle?: Raffle) => {
@@ -187,13 +187,10 @@ export const RafflesPage: React.FC = () => {
     <PageTemplate title="Rifas">
       <RafflesContainer>
         <RafflesList
-          raffles={raffles.slice(
-            page * itemsPerPage,
-            itemsPerPage * (page + 1)
-          )}
+          raffles={slicePagination(raffles, page, itemsPerPage)}
           page={page}
           pagesCount={pagesCount || 1}
-          paginate={handlePaginate}
+          paginate={handlePagination}
           onSelect={handleSelectRaffle}
           onCreateRaffle={handleRaffleCreation}
           selectedRaffle={selectedRaffle}

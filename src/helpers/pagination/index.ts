@@ -1,8 +1,14 @@
+// External
 import React from 'react';
+
+// Helpers
 import { toastrError } from 'helpers/errors';
+
+// Types
 import { Pagination } from '_types/Generics';
 
-interface Props<T> {
+// Interfaces
+interface IPagination<T> {
   pagination: number;
   currentPage: number;
   setPagesCount: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -21,7 +27,7 @@ export const handlePaginate = <T>({
   setItems,
   apiFetch,
   itemsPerPage = 9,
-}: Props<T>) => {
+}: IPagination<T>) => {
   // If paginate back
   if (pagination < 0) return setPage((_page) => _page - 1);
 
@@ -40,3 +46,9 @@ export const handlePaginate = <T>({
       toastrError(err, console.error);
     });
 };
+
+export const slicePagination = <T>(
+  items: T[],
+  page: number,
+  itemsPerPage: number
+) => items.slice(page * itemsPerPage, itemsPerPage * (page + 1));

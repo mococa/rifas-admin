@@ -1,11 +1,16 @@
 // External
-import { RoundButton } from 'components/RoundButton';
 import React from 'react';
+
+// Icons
 import { MdOutlineNavigateBefore, MdOutlineNavigateNext } from 'react-icons/md';
+
+// Components
+import { RoundButton } from 'components/RoundButton';
 
 // Styles
 import { PaginationHeaderContainer } from './styles';
 
+// Interfaces
 interface Props {
   onNext(): void;
   onPrevious(): void;

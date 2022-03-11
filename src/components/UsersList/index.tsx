@@ -1,6 +1,9 @@
 // External
 import React from 'react';
+
+// Icons
 import { MdPerson } from 'react-icons/md';
+
 // Types
 import { User } from '_types/User';
 

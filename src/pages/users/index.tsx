@@ -5,10 +5,11 @@ import React, { useEffect, useState } from 'react';
 import { User } from '_types/User';
 
 // API
-import { RafflesAPI } from 'api/Raffles';
+import { UserAPI } from 'api/Users';
 
 // Helpers
 import { toastrError } from 'helpers/errors';
+import { slicePagination, handlePaginate } from 'helpers/pagination';
 
 // Hooks
 import { useToastr } from 'mococa-toastr';
@@ -16,35 +17,24 @@ import { useDialog } from 'contexts/Dialog';
 
 // Components
 import { PageTemplate } from 'components/PageTemplate';
-import { UserAPI } from 'api/Users';
 import { PaginationHeader } from 'components/PaginationHeader';
-import { handlePaginate } from 'helpers/pagination';
 import { UsersList } from 'components/UsersList';
 import { RenderUserModal } from 'components/RenderUserModal';
 
-// Styles
+// Constants
+const itemsPerPage = 9;
 
 export const UsersPage: React.FC = () => {
+  // States
   const [page, setPage] = useState(0);
   const [pagesCount, setPagesCount] = useState<number | undefined>(1);
   const [users, setUsers] = useState<User[]>([]);
 
-  const itemsPerPage = 9;
-
+  // Context Hooks
   const toastr = useToastr();
-  const { createDialog, dismissDialog } = useDialog();
+  const { createDialog } = useDialog();
 
-  useEffect(() => {
-    UserAPI.list(page)
-      .then(({ items, meta }) => {
-        setPagesCount(meta.pages);
-        setUsers((prevUsers) => [...prevUsers, ...items]);
-      })
-      .catch((err) => {
-        toastrError(err, toastr.error);
-      });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  // Effects
   const handlePagination = (pagination: number) => {
     if (pagination < 0 && page + 1 <= 1) return;
     handlePaginate({
@@ -67,6 +57,19 @@ export const UsersPage: React.FC = () => {
     });
   };
 
+  // Effects
+  useEffect(() => {
+    UserAPI.list(page)
+      .then(({ items, meta }) => {
+        setPagesCount(meta.pages);
+        setUsers((prevUsers) => [...prevUsers, ...items]);
+      })
+      .catch((err) => {
+        toastrError(err, toastr.error);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <PageTemplate title="Usuários">
       <PaginationHeader
@@ -76,7 +79,7 @@ export const UsersPage: React.FC = () => {
         currentPage={page}
       />
       <UsersList
-        users={users.slice(page * itemsPerPage, itemsPerPage * (page + 1))}
+        users={slicePagination(users, page, itemsPerPage)}
         onClick={handleUserClick}
       />
     </PageTemplate>
