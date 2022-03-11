@@ -5,6 +5,8 @@ export const UserListContainer = styled.div`
   flex-flow: column;
   gap: 4px;
 
+  height: 71% !important;
+
   background-color: rgba(0, 0, 0, 0.05);
 `;
 

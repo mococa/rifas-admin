@@ -22,6 +22,7 @@ import { PageTemplate } from 'components/PageTemplate';
 import { RafflesList } from 'components/RafflesList';
 import { RaffleView } from 'components/RaffleView';
 import { FormCreator } from 'components/FormCreator';
+import { LoadingContainer } from 'components/LoadingContainer';
 
 // Styles
 import { RafflesContainer } from './styles';
@@ -35,6 +36,7 @@ export const RafflesPage: React.FC = () => {
   const [pagesCount, setPagesCount] = useState<number | undefined>(1);
   const [raffles, setRaffles] = useState<Raffle[]>([]);
   const [selectedRaffle, setSelectedRaffle] = useState<string>('');
+  const [loading, setLoading] = useState(false);
 
   // Context Hooks
   const toastr = useToastr();
@@ -54,9 +56,10 @@ export const RafflesPage: React.FC = () => {
   }, []);
 
   // Handlers
-  const handlePagination = (pagination: number) => {
+  const handlePagination = async (pagination: number) => {
     if (pagination < 0 && page + 1 <= 1) return;
-    handlePaginate({
+    setLoading(true);
+    await handlePaginate({
       pagination,
       apiFetch: RafflesAPI.get,
       currentPage: page,
@@ -66,6 +69,7 @@ export const RafflesPage: React.FC = () => {
       setPagesCount,
       itemsPerPage,
     });
+    setLoading(false);
   };
 
   const handleSelectRaffle = (raffle?: Raffle) => {
@@ -182,7 +186,12 @@ export const RafflesPage: React.FC = () => {
       ],
     });
   };
-
+  if (!raffles.length)
+    return (
+      <PageTemplate title="Rifas">
+        <LoadingContainer />
+      </PageTemplate>
+    );
   return (
     <PageTemplate title="Rifas">
       <RafflesContainer>
@@ -201,6 +210,7 @@ export const RafflesPage: React.FC = () => {
           onClearSelection={() => handleSelectRaffle()}
           raffle={raffles.find((raffle) => raffle._id === selectedRaffle)}
           onDelete={handleRaffleDelete}
+          loading={loading}
         />
       </RafflesContainer>
     </PageTemplate>

@@ -3,6 +3,7 @@ import { MdLock, MdEmail } from 'react-icons/md';
 import { Patterns } from 'helpers/patterns';
 import { Raffle } from '_types/Raffle';
 import { moneyfy } from 'helpers/number';
+import { Organization } from '_types/Organization';
 
 export const authInputs = () =>
   [
@@ -88,3 +89,52 @@ export const editRaffleInputs = (raffle: Raffle) =>
     });
     return input;
   });
+
+export const organizationInputs = (organization: Organization) => {
+  const typeThe = (thing: string) => `Digite ${thing} da organição`;
+  return [
+    {
+      name: 'zip',
+      placeholder: typeThe('o CEP'),
+      label: 'CEP',
+      defaultValue: organization.zip,
+      required: true,
+      type: 'tel',
+    },
+    {
+      name: 'street',
+      placeholder: typeThe('a rua'),
+      label: 'Rua',
+      defaultValue: organization.street,
+      required: true,
+    },
+    {
+      name: 'number',
+      placeholder: typeThe('o número'),
+      label: 'Número',
+      defaultValue: organization.number,
+      required: true,
+    },
+    {
+      name: 'district',
+      placeholder: typeThe('o bairro'),
+      label: 'Bairro',
+      defaultValue: organization.district,
+      required: true,
+    },
+    {
+      name: 'city',
+      placeholder: typeThe('a cidade'),
+      label: 'Cidade',
+      defaultValue: organization.city,
+      required: true,
+    },
+    {
+      name: 'state',
+      placeholder: typeThe('o Estado'),
+      label: 'UF',
+      defaultValue: organization.state,
+      required: true,
+    },
+  ] as Input[];
+};

@@ -20,6 +20,7 @@ import { PageTemplate } from 'components/PageTemplate';
 import { PaginationHeader } from 'components/PaginationHeader';
 import { UsersList } from 'components/UsersList';
 import { RenderUserModal } from 'components/RenderUserModal';
+import { LoadingContainer } from 'components/LoadingContainer';
 
 // Constants
 const itemsPerPage = 9;
@@ -29,15 +30,17 @@ export const UsersPage: React.FC = () => {
   const [page, setPage] = useState(0);
   const [pagesCount, setPagesCount] = useState<number | undefined>(1);
   const [users, setUsers] = useState<User[]>([]);
+  const [loading, setLoading] = useState(false);
 
   // Context Hooks
   const toastr = useToastr();
   const { createDialog } = useDialog();
 
   // Effects
-  const handlePagination = (pagination: number) => {
+  const handlePagination = async (pagination: number) => {
     if (pagination < 0 && page + 1 <= 1) return;
-    handlePaginate({
+    setLoading(true);
+    await handlePaginate({
       pagination,
       apiFetch: UserAPI.list,
       currentPage: page,
@@ -47,6 +50,7 @@ export const UsersPage: React.FC = () => {
       setPagesCount,
       itemsPerPage,
     });
+    setLoading(false);
   };
 
   const handleUserClick = (user: User) => {
@@ -70,6 +74,12 @@ export const UsersPage: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  if (!users.length)
+    return (
+      <PageTemplate title="Usuários">
+        <LoadingContainer />
+      </PageTemplate>
+    );
   return (
     <PageTemplate title="Usuários">
       <PaginationHeader
@@ -78,10 +88,13 @@ export const UsersPage: React.FC = () => {
         pagesCount={pagesCount || 0}
         currentPage={page}
       />
-      <UsersList
-        users={slicePagination(users, page, itemsPerPage)}
-        onClick={handleUserClick}
-      />
+      {!loading && (
+        <UsersList
+          users={slicePagination(users, page, itemsPerPage)}
+          onClick={handleUserClick}
+        />
+      )}
+      {loading && <LoadingContainer />}
     </PageTemplate>
   );
 };

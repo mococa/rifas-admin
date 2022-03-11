@@ -20,6 +20,7 @@ import { BsClockFill } from 'react-icons/bs';
 
 // Components
 import { RoundButton } from 'components/RoundButton';
+import { LoadingContainer } from 'components/LoadingContainer';
 
 // Hooks
 import { useToastr } from 'mococa-toastr';
@@ -50,6 +51,7 @@ interface Props {
   onEdit: (raffleId: string) => void;
   onDelete: (raffleId: string) => void;
   onClearSelection: () => void;
+  loading: boolean;
 }
 
 export const RaffleView: React.FC<Props> = ({
@@ -58,6 +60,7 @@ export const RaffleView: React.FC<Props> = ({
   onEdit,
   onClearSelection,
   onDelete,
+  loading,
 }) => {
   const toastr = useToastr();
 
@@ -77,7 +80,12 @@ export const RaffleView: React.FC<Props> = ({
   const handleRaffleEdit = () => {
     onEdit(raffle?._id || '');
   };
-
+  if (loading)
+    return (
+      <RaffleViewContainer>
+        <LoadingContainer />
+      </RaffleViewContainer>
+    );
   if (!raffle) return <RaffleViewContainer />;
 
   return (

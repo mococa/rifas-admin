@@ -1,6 +1,7 @@
 import { AuthPage } from 'pages/auth';
 import { MainPage } from 'pages/main';
 import { RafflesPage } from 'pages/raffles';
+import { SettingsPage } from 'pages/settings';
 import { UsersPage } from 'pages/users';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
@@ -12,6 +13,7 @@ export const Router: React.FC = () => {
       <Route path="/auth" element={<AuthPage />} />
       <Route path="/raffles" element={<RafflesPage />} />
       <Route path="/users" element={<UsersPage />} />
+      <Route path="/settings" element={<SettingsPage />} />
     </Routes>
   );
 };

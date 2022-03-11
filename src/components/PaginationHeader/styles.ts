@@ -1,4 +1,3 @@
-import { AppProvider } from 'contexts';
 import styled from 'styled-components/macro';
 
 export const PaginationHeaderContainer = styled.header`
@@ -6,7 +5,9 @@ export const PaginationHeaderContainer = styled.header`
   align-items: center;
 
   margin-top: 8px;
-  padding: 4px 8px;
+  padding: 0 12px;
+
+  height: 50px;
 
   border-radius: 4px 4px 0 0;
 
