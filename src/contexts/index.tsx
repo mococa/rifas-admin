@@ -10,12 +10,12 @@ import { DialogProvider } from './Dialog';
 
 export const AppProvider: React.FC = ({ children }) => (
   <ToastrProvider>
-    <DialogProvider>
-      <BrowserRouter>
-        <DarkModeProvider>
-          <AuthProvider>{children}</AuthProvider>
-        </DarkModeProvider>
-      </BrowserRouter>
-    </DialogProvider>
+    <BrowserRouter>
+      <AuthProvider>
+        <DialogProvider>
+          <DarkModeProvider>{children}</DarkModeProvider>
+        </DialogProvider>
+      </AuthProvider>
+    </BrowserRouter>
   </ToastrProvider>
 );
