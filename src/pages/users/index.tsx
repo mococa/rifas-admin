@@ -92,6 +92,7 @@ export const UsersPage: React.FC = () => {
         <UsersList
           users={slicePagination(users, page, itemsPerPage)}
           onClick={handleUserClick}
+          loading={loading}
         />
       )}
       {loading && <LoadingContainer />}

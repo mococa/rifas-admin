@@ -1,4 +1,5 @@
 // External
+import { LoadingContainer } from 'components/LoadingContainer';
 import React from 'react';
 
 // Icons
@@ -14,17 +15,20 @@ import { UserListContainer, UserRow } from './styles';
 interface Props {
   users: User[];
   onClick(user: User): void;
+  loading: boolean;
 }
 
-export const UsersList: React.FC<Props> = ({ users, onClick }) => {
+export const UsersList: React.FC<Props> = ({ users, onClick, loading }) => {
   return (
     <UserListContainer>
-      {users.map((user) => (
-        <UserRow key={user._id} onClick={() => onClick(user)}>
-          <MdPerson />
-          <span>{user.cpf}</span> |<span>{user.name}</span>
-        </UserRow>
-      ))}
+      {loading && <LoadingContainer />}
+      {!loading &&
+        users.map((user) => (
+          <UserRow key={user._id} onClick={() => onClick(user)}>
+            <MdPerson />
+            <span>{user.cpf}</span> |<span>{user.name}</span>
+          </UserRow>
+        ))}
     </UserListContainer>
   );
 };
