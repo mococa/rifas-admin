@@ -37,6 +37,8 @@ export const InputContainer = styled.div`
       padding-bottom: 6px;
       padding-left: 10px;
 
+      width: inherit;
+
       ::placeholder {
         opacity: 1;
       }

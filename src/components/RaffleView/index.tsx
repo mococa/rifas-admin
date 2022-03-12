@@ -19,6 +19,7 @@ import { IoTicketOutline, IoTrophy } from 'react-icons/io5';
 import { BsClockFill } from 'react-icons/bs';
 
 // Components
+import { Link } from 'react-router-dom';
 import { RoundButton } from 'components/RoundButton';
 import { LoadingContainer } from 'components/LoadingContainer';
 
@@ -42,6 +43,7 @@ import {
   RaffleTitle,
   RaffleViewContainer,
   TicketPrice,
+  Tickets,
 } from './styles';
 
 // Interfaces
@@ -142,6 +144,12 @@ export const RaffleView: React.FC<Props> = ({
         <IoTrophy />
         Prêmios: {raffle.prizes?.map(moneyfy).join('; ')}
       </Prizes>
+      <Link to={`/tickets?raffleId=${raffle._id}`}>
+        <Tickets>
+          <IoTicketOutline />
+          <b>Bilhetes</b>
+        </Tickets>
+      </Link>
     </RaffleViewContainer>
   );
 };

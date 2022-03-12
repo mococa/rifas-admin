@@ -34,9 +34,9 @@ export const UsersPage: React.FC = () => {
 
   // Context Hooks
   const toastr = useToastr();
-  const { createDialog } = useDialog();
+  const { createDialog, dismissDialog } = useDialog();
 
-  // Effects
+  // Handlers
   const handlePagination = async (pagination: number) => {
     if (pagination < 0 && page + 1 <= 1) return;
     setLoading(true);
@@ -56,7 +56,7 @@ export const UsersPage: React.FC = () => {
   const handleUserClick = (user: User) => {
     createDialog({
       title: user.name || '',
-      body: <RenderUserModal user={user} />,
+      body: <RenderUserModal user={user} onClose={dismissDialog} />,
       showCross: true,
     });
   };
@@ -85,7 +85,7 @@ export const UsersPage: React.FC = () => {
       <PaginationHeader
         onNext={() => handlePagination(1)}
         onPrevious={() => handlePagination(-1)}
-        pagesCount={pagesCount || 0}
+        pagesCount={pagesCount || 1}
         currentPage={page}
       />
       {!loading && (
