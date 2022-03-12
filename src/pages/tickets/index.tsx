@@ -101,11 +101,13 @@ export const TicketsPage: React.FC = () => {
                 name: 'userId',
                 label: 'Usuário',
                 placeholder: 'ID do usuário',
+                defaultValue: byUser,
               },
               {
                 name: 'raffleId',
                 label: 'Rifa',
                 placeholder: 'ID da rifa',
+                defaultValue: byRaffle,
               },
             ]}
             submitButtonText="Filtrar"

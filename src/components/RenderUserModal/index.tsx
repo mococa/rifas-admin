@@ -45,7 +45,7 @@ export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
       <Link to={`/tickets?userId=${user._id}`} onClick={onClose}>
         <b>
           <IoTicketOutline />
-          Tickets
+          Bilhetes
         </b>
       </Link>
     </UserModalContent>
