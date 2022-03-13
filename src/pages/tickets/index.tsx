@@ -9,6 +9,7 @@ import { TicketStatus } from 'enums/tickets';
 
 // Helpers
 import { handlePaginate } from 'helpers/pagination';
+import { TicketsFilterInputs } from 'helpers/inputs';
 
 // APIs
 import { TicketAPI } from 'api/Tickets';
@@ -39,13 +40,16 @@ export const TicketsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   // Handlers
-  const handleFetchTickets = (currentPage: number) => {
-    return TicketAPI.list(currentPage, byUser, byRaffle, itemsPerPage);
+  const handleFetchTickets = async (currentPage: number) => {
+    try {
+      setLoading(true);
+      return await TicketAPI.list(currentPage, byUser, byRaffle, itemsPerPage);
+    } finally {
+      setLoading(false);
+    }
   };
 
   const handlePagination = async (pagination: number) => {
-    if (pagination < 0 && page + 1 <= 1) return;
-    setLoading(true);
     await handlePaginate({
       pagination,
       apiFetch: handleFetchTickets,
@@ -56,7 +60,6 @@ export const TicketsPage: React.FC = () => {
       setPagesCount,
       itemsPerPage,
     });
-    setLoading(false);
   };
 
   const handleFilter = async ({
@@ -66,7 +69,7 @@ export const TicketsPage: React.FC = () => {
     userId: string;
     raffleId: string;
   }) => {
-    setLoading(true);
+    if (userId.trim() || raffleId.trim()) setLoading(true);
     setByUser(userId.trim());
     setByRaffle(raffleId.trim());
   };
@@ -82,7 +85,7 @@ export const TicketsPage: React.FC = () => {
   }, [byUser, byRaffle]);
 
   useEffect(() => {
-    handleFetchTickets(page).then(() => setLoading(false));
+    handleFetchTickets(page);
   }, [searchParams, page]);
 
   return (
@@ -96,20 +99,7 @@ export const TicketsPage: React.FC = () => {
       <TicketsContainer>
         <FiltersContainer>
           <FormCreator
-            fields={[
-              {
-                name: 'userId',
-                label: 'Usuário',
-                placeholder: 'ID do usuário',
-                defaultValue: byUser,
-              },
-              {
-                name: 'raffleId',
-                label: 'Rifa',
-                placeholder: 'ID da rifa',
-                defaultValue: byRaffle,
-              },
-            ]}
+            fields={TicketsFilterInputs(byUser, byRaffle)}
             submitButtonText="Filtrar"
             onSubmit={handleFilter}
           />

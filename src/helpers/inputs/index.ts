@@ -138,3 +138,19 @@ export const organizationInputs = (organization: Organization) => {
     },
   ] as Input[];
 };
+
+export const TicketsFilterInputs = (byUser: string, byRaffle: string) =>
+  [
+    {
+      name: 'userId',
+      label: 'Usuário',
+      placeholder: 'ID do usuário',
+      defaultValue: byUser,
+    },
+    {
+      name: 'raffleId',
+      label: 'Rifa',
+      placeholder: 'ID da rifa',
+      defaultValue: byRaffle,
+    },
+  ] as Input[];
