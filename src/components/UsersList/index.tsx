@@ -1,6 +1,11 @@
 // External
-import { LoadingContainer } from 'components/LoadingContainer';
 import React from 'react';
+
+// Helpers
+import { maskCPF } from 'helpers/masks';
+
+// Components
+import { LoadingContainer } from 'components/LoadingContainer';
 
 // Icons
 import { MdPerson } from 'react-icons/md';
@@ -26,7 +31,7 @@ export const UsersList: React.FC<Props> = ({ users, onClick, loading }) => {
         users.map((user) => (
           <UserRow key={user._id} onClick={() => onClick(user)}>
             <MdPerson />
-            <span>{user.cpf}</span> |<span>{user.name}</span>
+            <span>{maskCPF(user.cpf || '')}</span> |<span>{user.name}</span>
           </UserRow>
         ))}
     </UserListContainer>

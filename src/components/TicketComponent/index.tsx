@@ -1,6 +1,9 @@
 // External
 import React from 'react';
 
+// Helpers
+import { getFirstName, getName, maskCPF } from 'helpers/masks';
+
 // Icons
 import { BiWallet } from 'react-icons/bi';
 import { MdPerson } from 'react-icons/md';
@@ -32,7 +35,7 @@ export const TicketComponent: React.FC<Ticket> = ({
   // Handlers
   const handleTicketClick = () => {
     createDialog({
-      title: `Bilhete do(a) ${user?.name}`,
+      title: `Bilhete do(a) ${getFirstName(user?.name || '')}`,
       body: <div />,
       showCross: true,
     });
@@ -50,11 +53,11 @@ export const TicketComponent: React.FC<Ticket> = ({
         <TicketInfo>
           <div>
             <MdPerson />
-            <span>{user?.name}</span>
+            <span>{getName(user?.name || '')}</span>
           </div>
           <div>
             <BiWallet />
-            <span>{user?.cpf}</span>
+            <span>{maskCPF(user?.cpf || '')}</span>
           </div>
         </TicketInfo>
       </TicketBody>

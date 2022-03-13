@@ -1,12 +1,18 @@
 // External
-import React from 'react';
+import React, { useState } from 'react';
+
+// Helpers
+import { maskCPF } from 'helpers/masks';
 
 // Icons
-import { BiWallet } from 'react-icons/bi';
+import { BiHide, BiShow, BiWallet } from 'react-icons/bi';
 import { IoTicketOutline } from 'react-icons/io5';
 import { MdOutlineEmail, MdPerson, MdPhone } from 'react-icons/md';
 import { RiPlantLine } from 'react-icons/ri';
+
+// Components
 import { Link } from 'react-router-dom';
+import { RoundButton } from 'components/RoundButton';
 
 // Types
 import { User } from '_types/User';
@@ -21,6 +27,7 @@ interface Props {
 }
 
 export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
+  const [showingCPF, setShowingCPF] = useState(false);
   return (
     <UserModalContent>
       <h5>#{user._id}</h5>
@@ -28,7 +35,10 @@ export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
         <MdPerson /> Nome: {user.name}
       </span>
       <span>
-        <BiWallet /> CPF: {user.cpf}
+        <BiWallet /> CPF: {showingCPF ? user.cpf : maskCPF(user.cpf || '')}
+        <RoundButton onClick={() => setShowingCPF(!showingCPF)}>
+          {showingCPF ? <BiHide /> : <BiShow />}
+        </RoundButton>
       </span>
       <span>
         <MdPhone />
