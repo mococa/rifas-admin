@@ -18,15 +18,24 @@ export const ChildrenContainer = styled.div`
   display: flex;
   flex-flow: column;
   flex: 1;
+  --padding-top: 36px;
 
-  padding: 36px 24px 0;
+  padding: var(--padding-top) 24px 0;
+
+  height: calc(100vh - var(--padding-top) - var(--header-height));
 
   > div:nth-of-type(2) {
-    height: calc(100vh - 142px);
     padding: 24px 0;
+
+    height: calc(100% - 4px);
   }
 
   @media (${Devices.mobile}) {
     padding: 16px 8px 0;
+
+    height: calc(
+      100vh - var(--padding-top) - var(--header-height) -
+        var(--nav-bottom-height) - 16px
+    );
   }
 `;

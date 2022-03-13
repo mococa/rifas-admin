@@ -1,3 +1,4 @@
+import { Devices } from 'common/breakpoints';
 import styled from 'styled-components/macro';
 
 export const TicketsContainer = styled.div`
@@ -29,11 +30,26 @@ export const FiltersContainer = styled.div`
       min-width: 100px;
     }
   }
+
+  @media (${Devices.mobile}) {
+    form {
+      flex-flow: column;
+      width: 100%;
+      flex: 1;
+    }
+  }
 `;
 
 export const TicketsGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(4, 1fr);
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(3, 1fr);
   gap: 8px;
+
+  @media (${Devices.mobile}) {
+    grid-template-columns: 1fr;
+    grid-template-rows: inherit;
+
+    padding-bottom: 12px;
+  }
 `;

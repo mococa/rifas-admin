@@ -36,6 +36,7 @@ import {
   CreatedAt,
   CreatedBy,
   DescriptionLabel,
+  More,
   Prizes,
   RaffleActionButtons,
   RaffleActive,
@@ -149,6 +150,11 @@ export const RaffleView: React.FC<Props> = ({
           <IoTicketOutline />
           <b>Bilhetes</b>
         </Tickets>
+      </Link>
+      <Link to={`/raffles/${raffle._id}`}>
+        <More>
+          <b>Mais</b>
+        </More>
       </Link>
     </RaffleViewContainer>
   );

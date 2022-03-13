@@ -22,31 +22,41 @@ import { FormCreator } from 'components/FormCreator';
 import { LoadingContainer } from 'components/LoadingContainer';
 
 // Hooks
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+// import { useToastr } from 'mococa-toastr';
 
 // Styles
 import { FiltersContainer, TicketsContainer, TicketsGrid } from './styles';
 
-const itemsPerPage = 20;
+const itemsPerPage = 12;
+
+const getParams = (query: string) =>
+  new URLSearchParams(window.location.search).get(query) || '';
 
 export const TicketsPage: React.FC = () => {
   // States
-  const [searchParams, setSearchParams] = useSearchParams();
   const [tickets, setTickets] = useState<Ticket[]>([]);
   const [page, setPage] = useState(0);
   const [pagesCount, setPagesCount] = useState<number | undefined>();
-  const [byUser, setByUser] = useState(searchParams.get('userId') || '');
-  const [byRaffle, setByRaffle] = useState(searchParams.get('raffleId') || '');
+  const [byUser, setByUser] = useState(getParams('userId'));
+  const [byRaffle, setByRaffle] = useState(getParams('raffleId'));
   const [loading, setLoading] = useState(true);
 
+  // Context Hooks
+  // const toastr = useToastr();
+  const navigate = useNavigate();
+
   // Handlers
-  const handleFetchTickets = async (currentPage: number) => {
-    try {
-      setLoading(true);
-      return await TicketAPI.list(currentPage, byUser, byRaffle, itemsPerPage);
-    } finally {
-      setLoading(false);
-    }
+  const handleFetchTickets = async (currentPage = 0) => {
+    setLoading(true);
+    const fetchedTickets = await TicketAPI.list(
+      currentPage,
+      byUser,
+      byRaffle,
+      itemsPerPage
+    );
+    setLoading(false);
+    return fetchedTickets;
   };
 
   const handlePagination = async (pagination: number) => {
@@ -60,6 +70,7 @@ export const TicketsPage: React.FC = () => {
       setPagesCount,
       itemsPerPage,
     });
+    setLoading(false);
   };
 
   const handleFilter = async ({
@@ -76,17 +87,30 @@ export const TicketsPage: React.FC = () => {
 
   // Effects
   useEffect(() => {
+    if ((byUser || byRaffle) && tickets.length) {
+      setPage(0);
+      setTickets([]);
+    }
+    handleFetchTickets(0).then(({ items }) => setTickets(items));
+  }, [byUser, byRaffle]);
+
+  useEffect(() => {
     const query =
       '?' +
       `${byUser ? `userId=${byUser}&` : ''}${
         byRaffle ? `raffleId=${byRaffle}&` : ''
       }`;
-    setSearchParams(query);
-  }, [byUser, byRaffle]);
+    const shouldChangeSearch =
+      window.location.search !== query &&
+      (window.location.search || query.slice(1)) &&
+      (byRaffle !== getParams('raffleId') || byUser !== getParams('userId'));
 
-  useEffect(() => {
-    handleFetchTickets(page);
-  }, [searchParams, page]);
+    if (shouldChangeSearch) navigate(query.slice(0, -1));
+
+    if (page > 0) {
+      handleFetchTickets(page);
+    }
+  }, [byUser, byRaffle, page]);
 
   return (
     <PageTemplate title="Bilhetes">

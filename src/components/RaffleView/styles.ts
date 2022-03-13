@@ -106,3 +106,7 @@ export const DescriptionLabel = styled.b`
 export const Prizes = styled(Row)``;
 
 export const Tickets = styled(Row)``;
+
+export const More = styled(Row)`
+  color: var(--red);
+`;

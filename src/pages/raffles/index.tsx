@@ -186,12 +186,14 @@ export const RafflesPage: React.FC = () => {
       ],
     });
   };
+
   if (!raffles.length)
     return (
       <PageTemplate title="Rifas">
         <LoadingContainer />
       </PageTemplate>
     );
+
   return (
     <PageTemplate title="Rifas">
       <RafflesContainer>

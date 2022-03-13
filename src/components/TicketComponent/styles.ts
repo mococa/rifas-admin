@@ -44,8 +44,8 @@ export const TicketHeader = styled.header`
 export const TicketBody = styled.div`
   display: grid;
   grid-auto-flow: column;
-  grid-template-columns: 2fr 3fr;
-  gap: 4px;
+  grid-template-columns: auto 1fr;
+  gap: 8px;
 `;
 
 export const TicketNumber = styled.h1``;

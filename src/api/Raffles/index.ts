@@ -16,6 +16,10 @@ export class RafflesAPI {
     );
   }
 
+  static find(raffleId: string): Promise<Raffle> {
+    return request.get(`/raffles/${raffleId}`);
+  }
+
   static async create(raffle: RaffleFields): Promise<Raffle> {
     return request.put('/raffles', raffle);
   }

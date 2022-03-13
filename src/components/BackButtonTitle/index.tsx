@@ -8,6 +8,8 @@ import { IoArrowBack } from 'react-icons/io5';
 // Components
 import { RoundButton } from 'components/RoundButton';
 
+import { useRoute } from 'contexts/Route';
+
 // Styles
 import { BackButtonContainer } from './styles';
 
@@ -17,9 +19,11 @@ interface Props {
 }
 
 export const BackButtonTitle: React.FC<Props> = ({ text }) => {
+  const route = useRoute();
+
   return (
     <BackButtonContainer>
-      <Link to="/">
+      <Link to={route.from} onClick={route.pop}>
         <RoundButton>
           <IoArrowBack />
         </RoundButton>

@@ -11,11 +11,11 @@ export const global = createGlobalStyle`
       width: 10px;
 
     }
-    
+
     ::-webkit-scrollbar-track {
       background-color: rgba(0, 0, 0, 0.05);
     }
-    
+
     ::-webkit-scrollbar-thumb {
       background-color: rgba(0, 0, 0, 0.1);
       border-radius: 4px;
@@ -131,8 +131,11 @@ export const global = createGlobalStyle`
     --font-xl: 1.25rem;
 
     /* ----- Media Queries ----- */
-      --mobile: 675px;
+    --mobile: 675px;
 
+    /* ----- Sizes ----- */
+    --header-height: 67px;
+    --nav-bottom-height: 56px;
   }
 
   #toastr-root{
@@ -140,7 +143,7 @@ export const global = createGlobalStyle`
     bottom: 0;
     left: 8px;
   }
-  
+
   .toastr-container{
     display: flex;
     flex-flow: column-reverse;

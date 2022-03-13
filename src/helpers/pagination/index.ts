@@ -14,7 +14,7 @@ interface IPagination<T> {
   setPagesCount: React.Dispatch<React.SetStateAction<number | undefined>>;
   setPage: React.Dispatch<React.SetStateAction<number>>;
   items: T[];
-  setItems: (value: React.SetStateAction<T[]>) => void;
+  setItems: React.Dispatch<React.SetStateAction<T[]>>;
   apiFetch: (page: number) => Promise<Pagination<T>>;
   itemsPerPage?: number;
 }

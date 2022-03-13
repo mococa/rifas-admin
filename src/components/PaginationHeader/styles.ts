@@ -7,7 +7,7 @@ export const PaginationHeaderContainer = styled.header`
   margin-top: 8px;
   padding: 0 12px;
 
-  height: 50px;
+  min-height: 50px;
 
   border-radius: 4px 4px 0 0;
 

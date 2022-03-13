@@ -5,6 +5,9 @@ import React from 'react';
 import { BiWallet } from 'react-icons/bi';
 import { MdPerson } from 'react-icons/md';
 
+// Hooks
+import { useDialog } from 'contexts/Dialog';
+
 // Types
 import { Ticket } from '_types/Tickets';
 
@@ -23,10 +26,23 @@ export const TicketComponent: React.FC<Ticket> = ({
   number,
   status,
 }) => {
+  // Context hooks
+  const { createDialog } = useDialog();
+
+  // Handlers
+  const handleTicketClick = () => {
+    createDialog({
+      title: `Bilhete do(a) ${user?.name}`,
+      body: <div />,
+      showCross: true,
+    });
+  };
+
   return (
     <TicketContainer
       aria-current={raffle?.active || 'false'}
       aria-label={status}
+      onClick={handleTicketClick}
     >
       <TicketHeader>{raffle?.title}</TicketHeader>
       <TicketBody>
