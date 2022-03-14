@@ -40,6 +40,7 @@ export const TicketsPage: React.FC = () => {
   const [pagesCount, setPagesCount] = useState<number | undefined>();
   const [byUser, setByUser] = useState(getParams('userId'));
   const [byRaffle, setByRaffle] = useState(getParams('raffleId'));
+  const [byNumber, setByNumber] = useState(getParams('ticketNo'));
   const [loading, setLoading] = useState(true);
 
   // Context Hooks
@@ -53,6 +54,7 @@ export const TicketsPage: React.FC = () => {
       currentPage,
       byUser,
       byRaffle,
+      byNumber,
       itemsPerPage
     );
     setLoading(false);
@@ -76,41 +78,47 @@ export const TicketsPage: React.FC = () => {
   const handleFilter = async ({
     userId,
     raffleId,
+    ticketNo,
   }: {
     userId: string;
     raffleId: string;
+    ticketNo: string;
   }) => {
     if (userId.trim() || raffleId.trim()) setLoading(true);
     setByUser(userId.trim());
     setByRaffle(raffleId.trim());
+    setByNumber(ticketNo.trim());
   };
 
   // Effects
   useEffect(() => {
-    if ((byUser || byRaffle) && tickets.length) {
+    if ((byUser || byRaffle || byNumber) && tickets.length) {
       setPage(0);
       setTickets([]);
     }
     handleFetchTickets(0).then(({ items }) => setTickets(items));
-  }, [byUser, byRaffle]);
+  }, [byUser, byRaffle, byNumber]);
 
   useEffect(() => {
     const query =
       '?' +
       `${byUser ? `userId=${byUser}&` : ''}${
         byRaffle ? `raffleId=${byRaffle}&` : ''
-      }`;
+      }${byNumber ? `ticketNo=${byNumber}&` : ''}`;
+
     const shouldChangeSearch =
       window.location.search !== query &&
       (window.location.search || query.slice(1)) &&
-      (byRaffle !== getParams('raffleId') || byUser !== getParams('userId'));
+      (byRaffle !== getParams('raffleId') ||
+        byUser !== getParams('userId') ||
+        byNumber !== getParams('ticketNo'));
 
     if (shouldChangeSearch) navigate(query.slice(0, -1));
 
     if (page > 0) {
       handleFetchTickets(page);
     }
-  }, [byUser, byRaffle, page]);
+  }, [byUser, byRaffle, byNumber, page]);
 
   return (
     <PageTemplate title="Bilhetes">
@@ -123,7 +131,7 @@ export const TicketsPage: React.FC = () => {
       <TicketsContainer>
         <FiltersContainer>
           <FormCreator
-            fields={TicketsFilterInputs(byUser, byRaffle)}
+            fields={TicketsFilterInputs(byUser, byRaffle, byNumber)}
             submitButtonText="Filtrar"
             onSubmit={handleFilter}
           />

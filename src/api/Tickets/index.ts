@@ -10,12 +10,13 @@ export class TicketAPI {
     page: number,
     userId: string,
     raffleId: string,
+    ticketNo: string,
     ipp: number
   ): Promise<Pagination<Ticket>> {
     return request.get(
       `/tickets/admin?page=${page}${userId ? `&userId=${userId}` : ''}${
         raffleId ? `&raffleId=${raffleId}` : ''
-      }&ipp=${ipp}`
+      }${ticketNo ? `&ticketNo=${ticketNo}` : ''}&ipp=${ipp}`
     );
   }
 }

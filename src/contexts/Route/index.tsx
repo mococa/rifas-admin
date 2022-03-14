@@ -26,13 +26,18 @@ export const RouteProvider: React.FC = ({ children }) => {
   const [routes, setRoute] = useState<Route[]>([]);
 
   useEffect(() => {
-    setRoute((previosRoutes) => [
-      ...previosRoutes,
-      {
-        to: `${location.pathname}${location.search}`,
-        from: previosRoutes?.at(-1)?.to || '/',
-      },
-    ]);
+    setRoute((previousRoutes) => {
+      const lastRoute = previousRoutes?.at(-1)?.to || '/';
+      const sameRoute = location.pathname === lastRoute;
+      if (sameRoute) return previousRoutes;
+      return [
+        ...previousRoutes,
+        {
+          to: location.pathname,
+          from: lastRoute,
+        },
+      ];
+    });
   }, [location]);
 
   // Memos
