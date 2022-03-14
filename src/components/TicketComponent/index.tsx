@@ -14,6 +14,9 @@ import { useDialog } from 'contexts/Dialog';
 // Types
 import { Ticket } from '_types/Tickets';
 
+// Components
+import { RenderTicketModal } from 'components/RenderTicketModal';
+
 // Styles
 import {
   TicketBody,
@@ -23,41 +26,41 @@ import {
   TicketNumber,
 } from './styles';
 
-export const TicketComponent: React.FC<Ticket> = ({
-  user,
-  raffle,
-  number,
-  status,
-}) => {
+// Interface
+interface Props {
+  ticket: Ticket;
+}
+
+export const TicketComponent: React.FC<Props> = ({ ticket }) => {
   // Context hooks
-  const { createDialog } = useDialog();
+  const { createDialog, dismissDialog } = useDialog();
 
   // Handlers
   const handleTicketClick = () => {
     createDialog({
-      title: `Bilhete do(a) ${getFirstName(user?.name || '')}`,
-      body: <div />,
+      title: `Bilhete do(a) ${getFirstName(ticket.user?.name || '')}`,
+      body: <RenderTicketModal ticket={ticket} onClose={dismissDialog} />,
       showCross: true,
     });
   };
 
   return (
     <TicketContainer
-      aria-current={raffle?.active || 'false'}
-      aria-label={status}
+      aria-current={ticket.raffle?.active || 'false'}
+      aria-label={ticket.status}
       onClick={handleTicketClick}
     >
-      <TicketHeader>{raffle?.title}</TicketHeader>
+      <TicketHeader>{ticket.raffle?.title}</TicketHeader>
       <TicketBody>
-        <TicketNumber>#{number}</TicketNumber>
+        <TicketNumber>#{ticket.number}</TicketNumber>
         <TicketInfo>
           <div>
             <MdPerson />
-            <span>{getName(user?.name || '')}</span>
+            <span>{getName(ticket.user?.name || '')}</span>
           </div>
           <div>
             <BiWallet />
-            <span>{maskCPF(user?.cpf || '')}</span>
+            <span>{maskCPF(ticket.user?.cpf || '')}</span>
           </div>
         </TicketInfo>
       </TicketBody>

@@ -16,7 +16,7 @@ import {
   MdPerson,
 } from 'react-icons/md';
 import { IoTicketOutline, IoTrophy } from 'react-icons/io5';
-import { BsClockFill } from 'react-icons/bs';
+import { BsBoxSeam, BsClockFill } from 'react-icons/bs';
 
 // Components
 import { Link } from 'react-router-dom';
@@ -153,6 +153,7 @@ export const RaffleView: React.FC<Props> = ({
       </Link>
       <Link to={`/raffles/${raffle._id}`}>
         <More>
+          <BsBoxSeam />
           <b>Mais</b>
         </More>
       </Link>

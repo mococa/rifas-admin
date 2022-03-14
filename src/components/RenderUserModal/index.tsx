@@ -27,7 +27,9 @@ interface Props {
 }
 
 export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
+  // States
   const [showingCPF, setShowingCPF] = useState(false);
+
   return (
     <UserModalContent>
       <h5>#{user._id}</h5>

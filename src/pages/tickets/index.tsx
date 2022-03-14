@@ -132,14 +132,7 @@ export const TicketsPage: React.FC = () => {
         {!loading && (
           <TicketsGrid>
             {tickets.map((ticket) => (
-              <TicketComponent
-                key={ticket._id}
-                _id={ticket._id}
-                user={ticket.user}
-                raffle={ticket.raffle}
-                status={ticket.status as TicketStatus}
-                number={ticket.number}
-              />
+              <TicketComponent key={ticket._id} ticket={ticket} />
             ))}
           </TicketsGrid>
         )}
