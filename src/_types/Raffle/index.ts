@@ -10,6 +10,7 @@ export interface Raffle {
   createdBy?: User;
   maxUsers?: number;
   createdAt?: string;
+  amountOfUsers?: number;
 }
 
 export interface RaffleFields {

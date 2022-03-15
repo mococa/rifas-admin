@@ -1,3 +1,8 @@
+// External
+import React from 'react';
+import { Routes, Route } from 'react-router-dom';
+
+// Pages
 import { AuthPage } from 'pages/auth';
 import { MainPage } from 'pages/main';
 import { RafflePage } from 'pages/raffles/[id]';
@@ -5,8 +10,6 @@ import { RafflesPage } from 'pages/raffles';
 import { SettingsPage } from 'pages/settings';
 import { TicketsPage } from 'pages/tickets';
 import { UsersPage } from 'pages/users';
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
 
 export const Router: React.FC = () => {
   return (

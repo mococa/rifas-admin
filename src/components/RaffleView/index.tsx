@@ -29,6 +29,7 @@ import { useToastr } from 'mococa-toastr';
 // Helpers
 import { toastrError } from 'helpers/errors';
 import { moneyfy } from 'helpers/number';
+import { parseDate } from 'helpers/date';
 
 // Styles
 import {
@@ -128,17 +129,7 @@ export const RaffleView: React.FC<Props> = ({
       </Capacity>
       <CreatedAt>
         <BsClockFill />
-        Criada em:{' '}
-        {new Date(raffle.createdAt || 0)
-          .toLocaleString('pt-BR', {
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric',
-            hour: '2-digit',
-            minute: '2-digit',
-          })
-          .split(' ')
-          .join(', ')}
+        Criada em: {parseDate(raffle.createdAt, true)}
       </CreatedAt>
       <DescriptionLabel>Ver descrição</DescriptionLabel>
       <Prizes>
