@@ -1,5 +1,6 @@
 // External
 import React from 'react';
+import parse from 'html-react-parser';
 
 // Types
 import { Raffle } from '_types/Raffle';
@@ -25,6 +26,7 @@ import { LoadingContainer } from 'components/LoadingContainer';
 
 // Hooks
 import { useToastr } from 'mococa-toastr';
+import { useDialog } from 'contexts/Dialog';
 
 // Helpers
 import { toastrError } from 'helpers/errors';
@@ -66,8 +68,11 @@ export const RaffleView: React.FC<Props> = ({
   onDelete,
   loading,
 }) => {
+  // Context Hooks
   const toastr = useToastr();
+  const { createDialog } = useDialog();
 
+  // Handlers
   const handleRaffleTick = () => {
     if (raffle)
       RafflesAPI.tick(raffle)
@@ -84,12 +89,22 @@ export const RaffleView: React.FC<Props> = ({
   const handleRaffleEdit = () => {
     onEdit(raffle?._id || '');
   };
+
+  const handleSeeDescription = () => {
+    createDialog({
+      title: 'Descrição',
+      body: <div>{parse(raffle?.description || '')}</div>,
+      showCross: true,
+    });
+  };
+
   if (loading)
     return (
       <RaffleViewContainer>
         <LoadingContainer />
       </RaffleViewContainer>
     );
+
   if (!raffle) return <RaffleViewContainer />;
 
   return (
@@ -131,7 +146,9 @@ export const RaffleView: React.FC<Props> = ({
         <BsClockFill />
         Criada em: {parseDate(raffle.createdAt, true)}
       </CreatedAt>
-      <DescriptionLabel>Ver descrição</DescriptionLabel>
+      <DescriptionLabel onClick={handleSeeDescription}>
+        Ver descrição
+      </DescriptionLabel>
       <Prizes>
         <IoTrophy />
         Prêmios: {raffle.prizes?.map(moneyfy).join('; ')}
