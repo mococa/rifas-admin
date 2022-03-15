@@ -21,6 +21,27 @@ export const UserModalContent = styled.div`
 
   b {
     cursor: pointer;
+
     width: fit-content;
   }
+`;
+
+export const Row = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  width: fit-content;
+
+  b {
+    cursor: pointer;
+  }
+
+  button {
+    padding: 4px;
+  }
+`;
+
+export const TicketsRow = styled(Row)`
+  color: var(--red);
 `;

@@ -10,5 +10,6 @@ export interface Ticket {
   user?: User | null;
   raffle?: Raffle;
   number?: number;
+  createdAt?: string;
   status: TicketStatus;
 }

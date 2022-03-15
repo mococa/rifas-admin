@@ -46,9 +46,13 @@ export const TicketBody = styled.div`
   grid-auto-flow: column;
   grid-template-columns: auto 1fr;
   gap: 8px;
+
+  color: inherit;
 `;
 
-export const TicketNumber = styled.h1``;
+export const TicketNumber = styled.h1`
+  color: inherit;
+`;
 
 export const TicketInfo = styled.div`
   display: flex;
@@ -60,5 +64,9 @@ export const TicketInfo = styled.div`
     display: flex;
     align-items: center;
     gap: 4px;
+  }
+
+  span {
+    color: inherit;
   }
 `;

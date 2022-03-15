@@ -68,6 +68,10 @@ export const InnerCardContainer = styled.div`
     margin-bottom: 4px;
   }
 
+  span {
+    color: inherit;
+  }
+
   @media (${Devices.mobile}) {
     svg {
       width: 2.5rem;

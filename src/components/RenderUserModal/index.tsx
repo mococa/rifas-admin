@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 // Helpers
 import { maskCPF } from 'helpers/masks';
+import { parseDate } from 'helpers/date';
 
 // Icons
 import { BiHide, BiShow, BiWallet } from 'react-icons/bi';
@@ -18,7 +19,7 @@ import { RoundButton } from 'components/RoundButton';
 import { User } from '_types/User';
 
 // Styles
-import { UserModalContent } from './styles';
+import { Row, TicketsRow, UserModalContent } from './styles';
 
 // Interfaces
 interface Props {
@@ -33,32 +34,32 @@ export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
   return (
     <UserModalContent>
       <h5>#{user._id}</h5>
-      <span>
+      <Row>
         <MdPerson /> Nome: {user.name}
-      </span>
-      <span>
+      </Row>
+      <Row>
         <BiWallet /> CPF: {showingCPF ? user.cpf : maskCPF(user.cpf || '')}
         <RoundButton onClick={() => setShowingCPF(!showingCPF)}>
           {showingCPF ? <BiHide /> : <BiShow />}
         </RoundButton>
-      </span>
-      <span>
+      </Row>
+      <Row>
         <MdPhone />
-        Telefone: {user.phone}
-      </span>
-      <span>
+        <span>Telefone: {user.phone}</span>
+      </Row>
+      <Row>
         <MdOutlineEmail />
-        Email: {user.email}
-      </span>
-      <span>
+        <span>Email: {user.email}</span>
+      </Row>
+      <Row>
         <RiPlantLine />
-        Desde: {new Date(user.createdAt || 0).toLocaleDateString('pt-BR')}
-      </span>
+        <span>Desde: {parseDate(user.createdAt)}</span>
+      </Row>
       <Link to={`/tickets?userId=${user._id}`} onClick={onClose}>
-        <b>
+        <TicketsRow>
           <IoTicketOutline />
-          Bilhetes
-        </b>
+          <b>Bilhetes deste usuário</b>
+        </TicketsRow>
       </Link>
     </UserModalContent>
   );
