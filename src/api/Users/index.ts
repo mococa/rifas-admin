@@ -9,4 +9,8 @@ export class UserAPI {
   static list(page: number): Promise<Pagination<User>> {
     return request.get(`/users?page=${page}`);
   }
+
+  static find(userId: string): Promise<User> {
+    return request.get(`/users/${userId}`);
+  }
 }
