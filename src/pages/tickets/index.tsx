@@ -4,9 +4,6 @@ import React, { useEffect, useState } from 'react';
 // Types
 import { Ticket } from '_types/Tickets';
 
-// Enums
-import { TicketStatus } from 'enums/tickets';
-
 // Helpers
 import { handlePaginate } from 'helpers/pagination';
 import { TicketsFilterInputs } from 'helpers/inputs';
@@ -23,7 +20,6 @@ import { LoadingContainer } from 'components/LoadingContainer';
 
 // Hooks
 import { useNavigate } from 'react-router-dom';
-// import { useToastr } from 'mococa-toastr';
 
 // Styles
 import { FiltersContainer, TicketsContainer, TicketsGrid } from './styles';
@@ -44,7 +40,6 @@ export const TicketsPage: React.FC = () => {
   const [loading, setLoading] = useState(true);
 
   // Context Hooks
-  // const toastr = useToastr();
   const navigate = useNavigate();
 
   // Handlers

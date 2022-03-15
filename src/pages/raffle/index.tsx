@@ -1,17 +1,31 @@
+// External
+import React, { useEffect, useState } from 'react';
+
+// API
 import { RafflesAPI } from 'api/Raffles';
+
+// Components
 import { LoadingContainer } from 'components/LoadingContainer';
 import { PageTemplate } from 'components/PageTemplate';
+
+// Helpers
 import { toastrError } from 'helpers/errors';
+
+// Hooks
 import { useToastr } from 'mococa-toastr';
-import React, { useEffect, useState } from 'react';
+
+// Types
 import { Raffle } from '_types/Raffle';
 
 export const RafflePage: React.FC = () => {
+  // States
   const [raffle, setRaffle] = useState<Raffle | null>(null);
   const [loading, setLoading] = useState(true);
 
+  // Context Hooks
   const toastr = useToastr();
 
+  // Effects
   useEffect(() => {
     const raffleId = String(window.location.pathname.split('/').at(-1));
     RafflesAPI.find(raffleId)

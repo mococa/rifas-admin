@@ -52,7 +52,6 @@ export const RafflesPage: React.FC = () => {
       .catch((err) => {
         toastrError(err, toastr.error);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Handlers
