@@ -3,10 +3,12 @@ import React from 'react';
 
 // Helpers
 import { parseDate } from 'helpers/date';
+import { getFirstName } from 'helpers/masks';
 
 // Icons
 import { BsBoxSeam, BsClockFill } from 'react-icons/bs';
 import { MdPerson } from 'react-icons/md';
+import { IoTicketOutline } from 'react-icons/io5';
 import { RiHashtag } from 'react-icons/ri';
 
 // Components
@@ -16,7 +18,13 @@ import { Link } from 'react-router-dom';
 import { Ticket } from '_types/Tickets';
 
 // Styles
-import { RaffleRow, Row, TicketModalContainer, UserRow } from './styles';
+import {
+  RaffleRow,
+  Row,
+  TicketModalContainer,
+  TicketRow,
+  UserRow,
+} from './styles';
 
 // Interfaces
 interface Props {
@@ -51,6 +59,19 @@ export const RenderTicketModal: React.FC<Props> = ({ ticket, onClose }) => {
         <BsClockFill />
         <span>Comprado às {parseDate(ticket.createdAt, true)}</span>
       </Row>
+      <br />
+      <a href={`/tickets?userId=${ticket.user?._id}`}>
+        <TicketRow>
+          <IoTicketOutline />
+          <b>Ver bilhetes de {getFirstName(ticket.user?.name || '')}</b>
+        </TicketRow>
+      </a>
+      <a href={`/tickets?raffleId=${ticket.raffle?._id}`}>
+        <TicketRow>
+          <BsBoxSeam />
+          <b>Ver bilhetes desta rifa</b>
+        </TicketRow>
+      </a>
     </TicketModalContainer>
   );
 };

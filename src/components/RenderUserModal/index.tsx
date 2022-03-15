@@ -33,7 +33,9 @@ export const RenderUserModal: React.FC<Props> = ({ user, onClose }) => {
 
   return (
     <UserModalContent>
-      <h5>#{user._id}</h5>
+      <Link to={`/users/${user._id}`} onClick={onClose}>
+        <h5>#{user._id}</h5>
+      </Link>
       <Row>
         <MdPerson /> Nome: {user.name}
       </Row>

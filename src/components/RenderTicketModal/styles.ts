@@ -18,6 +18,10 @@ export const RaffleRow = styled(Row)`
   color: var(--orange);
 `;
 
+export const TicketRow = styled(Row)`
+  color: var(--red);
+`;
+
 export const UserRow = styled(Row)`
   color: var(--dark_blue);
 `;
